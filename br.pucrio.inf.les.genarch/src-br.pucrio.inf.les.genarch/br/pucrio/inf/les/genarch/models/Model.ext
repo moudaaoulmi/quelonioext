@@ -1,0 +1,25 @@
+import br::pucrio::inf::les::genarch::models::instance;
+
+ArchitectureEntity implementationElement(Object name,Object model) : 
+	JAVA br.pucrio.inf.les.genarch.models.InstanceModelHelper.implementationElement(java.lang.Object,java.lang.Object);
+	
+ArchitectureContainer container(Object name,Object model):
+	JAVA br.pucrio.inf.les.genarch.models.InstanceModelHelper.container(java.lang.Object,java.lang.Object);
+	
+ArchitectureResourceContainer resourceContainer(Object name,Object model):
+	JAVA br.pucrio.inf.les.genarch.models.InstanceModelHelper.resourceContainer(java.lang.Object,java.lang.Object);
+	
+ArchitectureEntity fragment(Object name,Object model) : 
+	JAVA br.pucrio.inf.les.genarch.models.InstanceModelHelper.fragment(java.lang.Object,java.lang.Object);
+	
+ArchitectureFragmentContainer fragmentsContainer(Object name,Object model) : 
+	JAVA br.pucrio.inf.les.genarch.models.InstanceModelHelper.fragmentsContainer(java.lang.Object,java.lang.Object);
+	
+Feature feature(Object name,Object model) : 
+	JAVA br.pucrio.inf.les.genarch.models.InstanceModelHelper.feature(java.lang.Object,java.lang.Object);
+
+Object featureConfigurations(Object name,Object model) : 
+	JAVA br.pucrio.inf.les.genarch.models.InstanceModelHelper.featureConfigurations(java.lang.Object,java.lang.Object);
+	
+Object domainModelElement(Object domainName,Object name,Object model) :
+	JAVA br.pucrio.inf.les.genarch.models.InstanceModelHelper.domainModelElement(java.lang.Object,java.lang.Object,java.lang.Object);
