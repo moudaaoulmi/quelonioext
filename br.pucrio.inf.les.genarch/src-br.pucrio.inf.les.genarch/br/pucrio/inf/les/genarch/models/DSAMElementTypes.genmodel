@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/br.pucrio.inf.les.genarch/src-br.pucrio.inf.les.genarch"
+    editDirectory="/br.pucrio.inf.les.genarch/src-br.pucrio.inf.les.genarch" editorDirectory="/br.pucrio.inf.les.genarch/src-br.pucrio.inf.les.genarch"
+    modelPluginID="GenarchMetaModels" modelName="DSAMElementTypes" editPluginClass="br.pucrio.inf.les.genarch.models.dsamtypes.provider.DSAMElementTypesEditPlugin"
+    editorPluginClass="br.pucrio.inf.les.genarch.models.dsamtypes.presentation.DSAMElementTypesEditorPlugin"
+    testsDirectory="/br.pucrio.inf.les.genarch/src-br.pucrio.inf.les.genarch" testSuiteClass="br.pucrio.inf.les.genarch.models.dsamtypes.tests.DSAMElementTypesAllTests"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="5.0" copyrightFields="false">
+  <foreignModel>DSAMElementTypes.ecore</foreignModel>
+  <genPackages prefix="Dsamtypes" basePackage="br.pucrio.inf.les.genarch.models" disposableProviderFactory="true"
+      ecorePackage="DSAMElementTypes.ecore#/">
+    <genClasses ecoreClass="DSAMElementTypes.ecore#//ArchitectureElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DSAMElementTypes.ecore#//ArchitectureElement/name"/>
+    </genClasses>
+    <genClasses ecoreClass="DSAMElementTypes.ecore#//ClassesImpl">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DSAMElementTypes.ecore#//ClassesImpl/associatedClasses"/>
+    </genClasses>
+    <genClasses ecoreClass="DSAMElementTypes.ecore#//AspectsImpl">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DSAMElementTypes.ecore#//AspectsImpl/associatedAspects"/>
+    </genClasses>
+    <genClasses ecoreClass="DSAMElementTypes.ecore#//FilesImpl">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DSAMElementTypes.ecore#//FilesImpl/associatedFiles"/>
+    </genClasses>
+    <genClasses ecoreClass="DSAMElementTypes.ecore#//TemplatesImpl">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DSAMElementTypes.ecore#//TemplatesImpl/associatedTemplates"/>
+    </genClasses>
+    <genClasses ecoreClass="DSAMElementTypes.ecore#//ComponentsImpl">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DSAMElementTypes.ecore#//ComponentsImpl/associatedComponents"/>
+    </genClasses>
+    <genClasses ecoreClass="DSAMElementTypes.ecore#//FoldesImpl">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DSAMElementTypes.ecore#//FoldesImpl/associatedFolders"/>
+    </genClasses>
+    <genClasses ecoreClass="DSAMElementTypes.ecore#//FragmentsImpl">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DSAMElementTypes.ecore#//FragmentsImpl/associatedFragments"/>
+    </genClasses>
+  </genPackages>
+  <genPackages prefix="Implementation" basePackage="br.pucrio.inf.les.genarch.models"
+      disposableProviderFactory="true" ecorePackage="ImplementationMetaModel.ecore#/">
+    <genClasses ecoreClass="ImplementationMetaModel.ecore#//Implementation">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImplementationMetaModel.ecore#//Implementation/containers"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImplementationMetaModel.ecore#//Implementation/resourcesContainer"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImplementationMetaModel.ecore#//Implementation/fragmentsContainer"/>
+    </genClasses>
+    <genClasses ecoreClass="ImplementationMetaModel.ecore#//ImplementationContainer">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ImplementationMetaModel.ecore#//ImplementationContainer/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImplementationMetaModel.ecore#//ImplementationContainer/components"/>
+    </genClasses>
+    <genClasses ecoreClass="ImplementationMetaModel.ecore#//ImplementationResourcesContainer">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ImplementationMetaModel.ecore#//ImplementationResourcesContainer/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImplementationMetaModel.ecore#//ImplementationResourcesContainer/folders"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImplementationMetaModel.ecore#//ImplementationResourcesContainer/files"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImplementationMetaModel.ecore#//ImplementationResourcesContainer/templates"/>
+    </genClasses>
+    <genClasses ecoreClass="ImplementationMetaModel.ecore#//ImplementationFragmentContainer">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ImplementationMetaModel.ecore#//ImplementationFragmentContainer/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImplementationMetaModel.ecore#//ImplementationFragmentContainer/fragments"/>
+    </genClasses>
+    <genClasses ecoreClass="ImplementationMetaModel.ecore#//ImplementationEntity">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ImplementationMetaModel.ecore#//ImplementationEntity/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ImplementationMetaModel.ecore#//ImplementationEntity/path"/>
+    </genClasses>
+    <genClasses ecoreClass="ImplementationMetaModel.ecore#//ImplementationComponent">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImplementationMetaModel.ecore#//ImplementationComponent/classes"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImplementationMetaModel.ecore#//ImplementationComponent/aspects"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImplementationMetaModel.ecore#//ImplementationComponent/templates"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImplementationMetaModel.ecore#//ImplementationComponent/files"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImplementationMetaModel.ecore#//ImplementationComponent/subComponents"/>
+    </genClasses>
+    <genClasses ecoreClass="ImplementationMetaModel.ecore#//ImplementationClass"/>
+    <genClasses ecoreClass="ImplementationMetaModel.ecore#//ImplementationAspect"/>
+    <genClasses ecoreClass="ImplementationMetaModel.ecore#//ImplementationFile"/>
+    <genClasses ecoreClass="ImplementationMetaModel.ecore#//ImplementationTemplate">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ImplementationMetaModel.ecore#//ImplementationTemplate/generationPath"/>
+    </genClasses>
+    <genClasses ecoreClass="ImplementationMetaModel.ecore#//ImplementationFolder">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImplementationMetaModel.ecore#//ImplementationFolder/subFolders"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImplementationMetaModel.ecore#//ImplementationFolder/files"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImplementationMetaModel.ecore#//ImplementationFolder/templates"/>
+    </genClasses>
+    <genClasses ecoreClass="ImplementationMetaModel.ecore#//ImplementationFragment">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ImplementationMetaModel.ecore#//ImplementationFragment/content"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>
