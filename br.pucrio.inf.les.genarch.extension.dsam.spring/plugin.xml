@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+ <copyright>
+ </copyright>
+
+ $Id$
+-->
+
+<plugin>
+
+	<extension
+         id="br.pucrio.inf.les.genarch.extension.dsam.spring.dsm"
+         name="SpringDSM"
+         point="br.pucrio.inf.les.genarch.domainModel">
+         <model
+           ePackageClass="br.pucrio.inf.les.genarch.extension.dsam.spring.SpringPackage"
+           itemProviderAdapterFactory="br.pucrio.inf.les.genarch.extension.dsam.spring.provider.SpringItemProviderAdapterFactory"
+           name="Spring"
+           referenceName="spring">
+     </model>
+   </extension>
+   <extension
+         id="br.pucrio.inf.les.genarch.extension.dsam.deployment.extractor"
+         name="DeploymentDSMExtractor"
+         point="br.pucrio.inf.les.genarch.domainModelExtractor">     
+     <extractor
+           class="br.pucrio.inf.les.genarch.extension.dsam.spring.extractor.SpringExtractor"
+           name="SpringExtractor">
+     </extractor>
+   </extension>
+
+  <extension point="org.eclipse.emf.edit.itemProviderAdapterFactories">
+    <factory 
+       uri = "http:///SpringDomainModel.ecore" 
+       class = "br.pucrio.inf.les.genarch.extension.dsam.spring.provider.SpringItemProviderAdapterFactory"
+       supportedTypes = 
+         "org.eclipse.emf.edit.provider.IEditingDomainItemProvider
+          org.eclipse.emf.edit.provider.IStructuredItemContentProvider
+          org.eclipse.emf.edit.provider.ITreeItemContentProvider
+          org.eclipse.emf.edit.provider.IItemLabelProvider
+          org.eclipse.emf.edit.provider.IItemPropertySource" />
+  </extension>
+  
+  
+  
+  
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package
+       uri = "http:///SpringDomainModel.ecore"
+       class = "br.pucrio.inf.les.genarch.extension.dsam.spring.SpringPackage"
+       genModel = "metamodel/SpringDomainModel.genmodel" /> 
+  </extension>
+
+
+
+
+
+
+  <extension point = "org.eclipse.ui.editors">
+    <editor
+        id = "br.pucrio.inf.les.genarch.models.domain.editor.DomainModelEditorID"
+        name = "Domain Model Editor"
+        icon = "icons/full/obj16/SpringModelFile.gif"
+        extensions = "spring"
+        class = "br.pucrio.inf.les.genarch.models.domain.editor.DomainModelEditor" 
+        contributorClass="br.pucrio.inf.les.genarch.models.domain.editor.DomainModelActionBarContributor" >
+    </editor>
+  </extension>    
+
+
+
+
+
+
+</plugin>
