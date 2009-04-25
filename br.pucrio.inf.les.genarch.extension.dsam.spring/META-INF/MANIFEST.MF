@@ -1,0 +1,23 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %pluginName
+Bundle-SymbolicName: br.pucrio.inf.les.genarch.extension.dsam.spring; singleton:=true
+Bundle-Version: 1.0.0
+Bundle-ClassPath: .
+Bundle-Activator: br.pucrio.inf.les.genarch.extension.dsam.spring.provider.SpringDomainModelEditPlugin$Implementation
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Export-Package: br.pucrio.inf.les.genarch.extension.dsam.spring,
+ br.pucrio.inf.les.genarch.extension.dsam.spring.impl,
+ br.pucrio.inf.les.genarch.extension.dsam.spring.provider,
+ br.pucrio.inf.les.genarch.extension.dsam.spring.util
+Require-Bundle: br.pucrio.inf.les.genarch,
+ org.eclipse.core.runtime,
+ org.eclipse.core.resources;visibility:=reexport,
+ org.eclipse.emf.ecore;visibility:=reexport,
+ org.eclipse.emf.edit;visibility:=reexport,
+ org.eclipse.emf.ecore.xmi;visibility:=reexport,
+ org.eclipse.emf.edit.ui;visibility:=reexport,
+ org.eclipse.ui.ide;visibility:=reexport
+Eclipse-LazyStart: true
