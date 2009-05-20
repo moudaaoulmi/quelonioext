@@ -30,6 +30,7 @@ import br.pucrio.inf.les.genarch.core.models.ImplementationModelContent;
 import br.pucrio.inf.les.genarch.core.models.TemplateContent;
 import br.pucrio.inf.les.genarch.core.models.dsl.FMPModelUitl;
 import br.pucrio.inf.les.genarch.core.plugin.GenArchPluginFacade;
+import br.pucrio.inf.les.genarch.core.plugin.IDomainModelPath;
 import br.pucrio.inf.les.genarch.core.project.GenarchProjectConfigurationFile;
 import br.pucrio.inf.les.genarch.core.project.navigation.ProjectNavigator;
 import br.pucrio.inf.les.genarch.core.project.navigation.itens.VariabilityItem;
@@ -192,10 +193,10 @@ public class CreateModelsOperation implements IRunnableWithProgress {
 		List<IDomainModelExtractor> extractors = GenArchPluginFacade.Instance().getDomainModelExtractors();
 		
 		for ( IDomainModelExtractor domainModelExtractor : extractors ) {
-			String dsmName = domainModelExtractor.extract(project);
+			IDomainModelPath domainModelPath = domainModelExtractor.extract(project);
 							
 			DSM dsm = ConfigurationPackage.eINSTANCE.getConfigurationFactory().createDSM();
-			dsm.setName(dsmName);
+			dsm.setName(domainModelPath.getDomainModelName());
 			
 			dsmMappings.getModels().add(dsm);						
 		}

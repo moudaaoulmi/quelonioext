@@ -47,6 +47,7 @@ import br.pucrio.inf.les.genarch.models.dsamtypes.GroupFiles;
 import br.pucrio.inf.les.genarch.models.dsamtypes.GroupFolders;
 import br.pucrio.inf.les.genarch.models.dsamtypes.GroupFragments;
 import br.pucrio.inf.les.genarch.models.dsamtypes.GroupTemplates;
+import br.pucrio.inf.les.genarch.models.dsamtypes.IntraDependence;
 import br.pucrio.inf.les.genarch.models.dsamtypes.TemplateDependence;
 import br.pucrio.inf.les.genarch.models.implementation.ImplementationAspect;
 import br.pucrio.inf.les.genarch.models.implementation.ImplementationClass;
@@ -499,6 +500,20 @@ public class CSPBuilder {
 				Constraint implConstraint = ifOnlyIf(ls,rs);
 				mModels.addConstraint(implConstraint);
 			}
+		}
+		
+		i = findElementsByType(DsamtypesPackage.eINSTANCE.getIntraDependence(),domainModel.eContents());
+		
+		while ( i.hasNext() ) {
+			EObject o = (EObject)i.next();
+			IntraDependence intraDependenceElement = (IntraDependence)o;
+			DomainElement domainElement = (DomainElement)o;
+
+			DomainElement associatedElement = intraDependenceElement.getDependences();
+			Constraint rs = eq(domainModelVariables.get(domainElement.getName()),sel);					
+			Constraint ls = eq(domainModelVariables.get(associatedElement.getName()),sel);
+			Constraint implConstraint = ifOnlyIf(ls,rs);
+			mModels.addConstraint(implConstraint);
 		}
 	}
 

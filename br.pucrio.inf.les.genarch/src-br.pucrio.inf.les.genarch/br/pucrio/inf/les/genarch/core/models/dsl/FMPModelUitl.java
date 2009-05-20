@@ -102,7 +102,7 @@ public class FMPModelUitl {
 		externalLoader.save(0);	
 	}
 
-	private void createModel(IFile fmpModelFile, Resource resource,String fmpProjectName) {
+	private void createModel(IFile fmpModelFile,Resource resource,String fmpProjectName) {
 		try {
 			fmpProject = MetaModel.makeProject();			
 			if ( fmpProject != null) {				
@@ -111,16 +111,16 @@ public class FMPModelUitl {
 				model.setName(modelName);
 				model.setId(ModelManipulation.INSTANCE.getValidId(modelName));						
 
-				Feature feature = MetaModel.createFeatureWithProperties(fmpProjectName,ModelManipulation.INSTANCE.getValidId(fmpProjectName), ConfigState.USER_SELECTED_LITERAL, ValueType.NONE_LITERAL,null, null, 0, 0, fmpProject.getMetaModel());
+				Feature feature = MetaModel.createFeatureWithProperties(fmpProjectName,ModelManipulation.INSTANCE.getValidId(fmpProjectName), ConfigState.USER_SELECTED_LITERAL, ValueType.NONE_LITERAL,null, null, 1, 1, fmpProject.getMetaModel());
 				model.getChildren().add(feature);
 				configureFeature(feature,model,fmpProject.getMetaModel());		
 
-				Feature metaModel = fmpProject.getMetaModel();
+				/*Feature metaModel = fmpProject.getMetaModel();
 				Node nodeFeature = modelNavigation.findNodeWithName(metaModel, "Feature");
 				Feature crosscuttingFeature = MetaModel.createFeatureWithProperties("Crosscutting", "crosscutting", ConfigState.UNDECIDED_LITERAL, ValueType.NONE_LITERAL, null, null, 0, 1, fmpProject.getMetaMetaModel());
 				Feature joinpointFeature = MetaModel.createFeatureWithProperties("Joinpoint", "joinpoint", ConfigState.UNDECIDED_LITERAL, ValueType.NONE_LITERAL, null, null, 0, 1, fmpProject.getMetaMetaModel());
 				nodeFeature.getChildren().add(crosscuttingFeature);
-				nodeFeature.getChildren().add(joinpointFeature);
+				nodeFeature.getChildren().add(joinpointFeature);*/
 
 				resource.getContents().add(fmpProject);
 			}	   

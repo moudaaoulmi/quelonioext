@@ -37,7 +37,7 @@ public class GenArchPlugin extends Plugin {
 	public static final String GENARCH_NATURE = PLUGIN_ID + ".genarchnature";
 
 	public static final String GENARCH_CONTAINER = PLUGIN_ID + ".GENARCH_CONTAINER";
-
+	
 	public GenArchPlugin() {
 		super();
 	}
@@ -49,9 +49,9 @@ public class GenArchPlugin extends Plugin {
 	public void start(BundleContext context) throws Exception {	
 		super.start(context);
 
-		processExtensionPoint("br.pucrio.inf.les.genarch.domainModel", new DomainModelExtensionPointProcessor());
-		processExtensionPoint("br.pucrio.inf.les.genarch.domainModelExtractor", new DomainModelExtractorExtensionPointProcessor());
-		processExtensionPoint("br.pucrio.inf.les.genarch.domainModelProcessors", new DomainModelProcessorsExtensionPointProcessor());
+		processExtensionPoint("br.pucrio.inf.les.genarch.domainModel",new DomainModelExtensionPointProcessor());
+		processExtensionPoint("br.pucrio.inf.les.genarch.domainModelExtractor",new DomainModelExtractorExtensionPointProcessor());
+		processExtensionPoint("br.pucrio.inf.les.genarch.domainModelProcessors",new DomainModelProcessorsExtensionPointProcessor());
 
 		/*Thread currentThread = Thread.currentThread();
 		ClassLoader currentLoader = currentThread.getContextClassLoader();
@@ -97,7 +97,6 @@ public class GenArchPlugin extends Plugin {
 				domainModelDescription.setName(configElement.getAttribute("name"));
 				domainModelDescription.setReferenceName(configElement.getAttribute("referenceName"));
 
-
 				TreeIterator i = ePackage.eAllContents();
 
 				while ( i.hasNext() ) {					
@@ -112,12 +111,14 @@ public class GenArchPlugin extends Plugin {
 								importingMetadata.setElementType(((EClass)eAnnotation.eContainer()).getName());
 								importingMetadata.setMetaProp(eAnnotation.getDetails().get("prop"));
 								importingMetadata.setMetaAttr(eAnnotation.getDetails().get("attr"));
+								domainModelDescription.getImportingMetadas().add(importingMetadata);
 							} else if ( eAnnotation.getSource().equalsIgnoreCase("ANNOTATION") ) {
 								ImportingMetadata importingMetadata = new ImportingMetadata();
 								importingMetadata.setType(ImportingMetadata.ANNOTATION);
 								importingMetadata.setElementType(eAnnotation.getEModelElement().eClass().getName());
 								importingMetadata.setMetaProp(eAnnotation.getDetails().get("prop"));
 								importingMetadata.setMetaAttr(eAnnotation.getDetails().get("attr"));
+								domainModelDescription.getImportingMetadas().add(importingMetadata);
 							}
 						}
 					}

@@ -44,7 +44,7 @@ public class ExtractToFragmentWizard extends Wizard implements INewWizard {
 		String fragmentName = this.extractToFragmentWizardPage.getFragmentName();
 		String fragmentContainerName = this.extractToFragmentWizardPage.getFragmentContainerName();
 
-		fragmentContainerName = fragmentContainerName.substring("Fragment Container".length() + 4,fragmentContainerName.length());
+		fragmentContainerName = fragmentContainerName.substring("Fragment Container".length()+1,fragmentContainerName.length());
 
 		ImplementationModelHandle implementationModelHandle = ImplementationModelHandle.implementationModel(this.project);
 		ImplementationFragmentContainer fragmentContainer = implementationModelHandle.get().fragmentContainer(fragmentContainerName);
