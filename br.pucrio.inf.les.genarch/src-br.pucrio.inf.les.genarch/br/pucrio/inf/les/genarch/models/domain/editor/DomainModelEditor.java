@@ -1334,7 +1334,9 @@ implements IEditingDomainProvider, ISelectionProvider, IMenuListener, IViewerPro
 					//
 					contentOutlineViewer.setContentProvider(new AdapterFactoryContentProvider(adapterFactory));
 					contentOutlineViewer.setLabelProvider(new AdapterFactoryLabelProvider(adapterFactory));
-					contentOutlineViewer.setInput(editingDomain.getResourceSet());
+										
+					//int domainModelIndex = getActivePage() + 1;
+					//contentOutlineViewer.setInput(editingDomain.getResourceSet().getResources().get(domainModelIndex));
 
 					// Make sure our popups work.
 					//
@@ -1343,7 +1345,7 @@ implements IEditingDomainProvider, ISelectionProvider, IMenuListener, IViewerPro
 					if (!editingDomain.getResourceSet().getResources().isEmpty()) {
 						// Select the root object in the view.
 						//
-						contentOutlineViewer.setSelection(new StructuredSelection(editingDomain.getResourceSet().getResources().get(0)), true);
+						//contentOutlineViewer.setSelection(new StructuredSelection(editingDomain.getResourceSet().getResources().get(0)), true);
 					}
 				}
 
@@ -1412,7 +1414,7 @@ implements IEditingDomainProvider, ISelectionProvider, IMenuListener, IViewerPro
 	 * @generated
 	 */
 	public void handleContentOutlineSelection(ISelection selection) {
-		if (currentViewerPane != null && !selection.isEmpty() && selection instanceof IStructuredSelection) {
+		/*if (currentViewerPane != null && !selection.isEmpty() && selection instanceof IStructuredSelection) {
 			Iterator<?> selectedElements = ((IStructuredSelection)selection).iterator();
 			if (selectedElements.hasNext()) {
 				// Get the first selected element.
@@ -1441,7 +1443,7 @@ implements IEditingDomainProvider, ISelectionProvider, IMenuListener, IViewerPro
 					}
 				}
 			}
-		}
+		}*/
 	}
 
 	/**

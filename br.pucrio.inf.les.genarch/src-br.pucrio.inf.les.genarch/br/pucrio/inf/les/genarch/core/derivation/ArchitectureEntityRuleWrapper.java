@@ -1,11 +1,13 @@
 package br.pucrio.inf.les.genarch.core.derivation;
 
+import java.util.HashMap;
+
 
 public class ArchitectureEntityRuleWrapper {
 	
 	private String name;
 	private boolean selected = true;
-	
+		
 	public ArchitectureEntityRuleWrapper(String name) {
 		this.name = name;
 	}
