@@ -75,5 +75,11 @@
         eType="ecore:EClass ImplementationMetaModel.ecore#//ImplementationFragment"
         containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IntraDependence" eSuperTypes="#//DependenceRelationship">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dependences" eType="#//DomainElement"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ExtraDependence" eSuperTypes="#//DependenceRelationship">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dependences" eType="#//DomainElement"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="VariableElement" eSuperTypes="#//DomainElement"/>
 </ecore:EPackage>
