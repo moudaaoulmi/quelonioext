@@ -35,12 +35,42 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="expressions" upperBound="-1"
         eType="#//Expression" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="capabilities" upperBound="-1"
-        eType="#//Capability" containment="true"/>
+        eType="#//CapabilityReference" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Plan" eSuperTypes="DSAMElementTypes.ecore#//VariableElement DSAMElementTypes.ecore#//GroupFragments DSAMElementTypes.ecore#//GroupClass"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Goal" eSuperTypes="DSAMElementTypes.ecore#//VariableElement DSAMElementTypes.ecore#//GroupFragments"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Event" eSuperTypes="DSAMElementTypes.ecore#//VariableElement DSAMElementTypes.ecore#//GroupFragments"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Belief" eSuperTypes="DSAMElementTypes.ecore#//VariableElement DSAMElementTypes.ecore#//GroupFragments"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Expression" eSuperTypes="DSAMElementTypes.ecore#//VariableElement DSAMElementTypes.ecore#//GroupFragments"/>
-  <eClassifiers xsi:type="ecore:EClass" name="CapabilityReference" eSuperTypes="DSAMElementTypes.ecore#//GroupFragments DSAMElementTypes.ecore#//IntraDependence"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Plan" eSuperTypes="DSAMElementTypes.ecore#//VariableElement DSAMElementTypes.ecore#//GroupFragments DSAMElementTypes.ecore#//GroupClass">
+    <eAnnotations source="XML">
+      <details key="prop" value="plan"/>
+      <details key="attr" value="name"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Goal" eSuperTypes="DSAMElementTypes.ecore#//VariableElement DSAMElementTypes.ecore#//GroupFragments">
+    <eAnnotations source="XML">
+      <details key="prop" value="goal"/>
+      <details key="attr" value="name"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Event" eSuperTypes="DSAMElementTypes.ecore#//VariableElement DSAMElementTypes.ecore#//GroupFragments">
+    <eAnnotations source="XML">
+      <details key="prop" value="event"/>
+      <details key="attr" value="name"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Belief" eSuperTypes="DSAMElementTypes.ecore#//VariableElement DSAMElementTypes.ecore#//GroupFragments">
+    <eAnnotations source="XML">
+      <details key="prop" value="beliefref"/>
+      <details key="attr" value="name"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Expression" eSuperTypes="DSAMElementTypes.ecore#//VariableElement DSAMElementTypes.ecore#//GroupFragments">
+    <eAnnotations source="XML">
+      <details key="prop" value="expression"/>
+      <details key="attr" value="name"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CapabilityReference" eSuperTypes="DSAMElementTypes.ecore#//GroupFragments DSAMElementTypes.ecore#//IntraDependence">
+    <eAnnotations source="XML">
+      <details key="prop" value="capability"/>
+      <details key="attr" value="name"/>
+    </eAnnotations>
+  </eClassifiers>
 </ecore:EPackage>
