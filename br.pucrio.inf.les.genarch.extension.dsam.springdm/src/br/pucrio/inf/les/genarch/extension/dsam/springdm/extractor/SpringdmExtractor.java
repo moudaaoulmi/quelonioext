@@ -28,7 +28,7 @@ public class SpringdmExtractor implements IDomainModelExtractor {
 	public IDomainModelPath extract(IProject project) {
 		
 		DomainModelPath domainModelPath = new DomainModelPath();
-		String springdmFileName = "/models/SpringModel.spring";
+		String springdmFileName = "/models/SpringDMModel.springdm";
 		IFile springdmModelFile = project.getFile(springdmFileName);
 		URI springdmFileURI = URI.createPlatformResourceURI(springdmModelFile.getFullPath().toString());
 
