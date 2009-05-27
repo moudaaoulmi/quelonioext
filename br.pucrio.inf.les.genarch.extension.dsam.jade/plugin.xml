@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+ <copyright>
+ </copyright>
+
+ $Id$
+-->
+
+<plugin>
+
+<extension
+         id="br.pucrio.inf.les.genarch.extension.dsam.jade"
+         name="Jade"
+         point="br.pucrio.inf.les.genarch.domainModel">
+         <model
+           ePackageClass="br.pucrio.inf.les.genarch.extension.dsam.jade.JadePackage"
+           itemProviderAdapterFactory="br.pucrio.inf.les.genarch.extension.dsam.jade.provider.JadeItemProviderAdapterFactory"
+           name="Jade"
+           referenceName="jade">
+     </model>
+   </extension>
+   <extension
+         id="br.pucrio.inf.les.genarch.extension.dsam.jade.extractor"
+         name="JadeExtractor"
+         point="br.pucrio.inf.les.genarch.domainModelExtractor">     
+     <extractor
+           class="br.pucrio.inf.les.genarch.extension.dsam.jade.extractor.JadeExtractor"
+           name="JadeExtractor">
+     </extractor>
+   </extension>
+
+  
+  <extension point = "org.eclipse.ui.editors">
+    <editor
+        id = "br.pucrio.inf.les.genarch.models.domain.editor.DomainModelEditorID"
+        name = "Domain Model Editor"
+        icon = "icons/full/obj16/SpringModelFile.gif"
+        extensions = "jade"
+        class = "br.pucrio.inf.les.genarch.models.domain.editor.DomainModelEditor" 
+        contributorClass="br.pucrio.inf.les.genarch.models.domain.editor.DomainModelActionBarContributor" >
+    </editor>
+  </extension>
+
+  <extension point="org.eclipse.emf.edit.itemProviderAdapterFactories">
+    <factory 
+       uri = "http:///JadeDSAM.ecore" 
+       class = "br.pucrio.inf.les.genarch.extension.dsam.jade.provider.JadeItemProviderAdapterFactory"
+       supportedTypes = 
+         "org.eclipse.emf.edit.provider.IEditingDomainItemProvider
+          org.eclipse.emf.edit.provider.IStructuredItemContentProvider
+          org.eclipse.emf.edit.provider.ITreeItemContentProvider
+          org.eclipse.emf.edit.provider.IItemLabelProvider
+          org.eclipse.emf.edit.provider.IItemPropertySource" />
+  </extension>
+  
+  <extension point="org.eclipse.emf.edit.itemProviderAdapterFactories">
+    <factory 
+       uri = "http:///DSAMElementTypes" 
+       class = "br.pucrio.inf.les.genarch.models.dsamtypes.provider.DsamtypesItemProviderAdapterFactory"
+       supportedTypes = 
+         "org.eclipse.emf.edit.provider.IEditingDomainItemProvider
+          org.eclipse.emf.edit.provider.IStructuredItemContentProvider
+          org.eclipse.emf.edit.provider.ITreeItemContentProvider
+          org.eclipse.emf.edit.provider.IItemLabelProvider
+          org.eclipse.emf.edit.provider.IItemPropertySource" />
+  </extension>
+  
+  <extension point="org.eclipse.emf.edit.itemProviderAdapterFactories">
+    <factory 
+       uri = "http:///ImplementationMetaModel.ecore" 
+       class = "br.pucrio.inf.les.genarch.models.implementation.provider.ImplementationItemProviderAdapterFactory"
+       supportedTypes = 
+         "org.eclipse.emf.edit.provider.IEditingDomainItemProvider
+          org.eclipse.emf.edit.provider.IStructuredItemContentProvider
+          org.eclipse.emf.edit.provider.ITreeItemContentProvider
+          org.eclipse.emf.edit.provider.IItemLabelProvider
+          org.eclipse.emf.edit.provider.IItemPropertySource" />
+  </extension>
+  
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package
+       uri = "http:///JadeDSAM.ecore"
+       class = "br.pucrio.inf.les.genarch.extension.dsam.jade.JadePackage"
+       genModel = "metamodel/JadeDSAM.genmodel" /> 
+  </extension>
+
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package
+       uri = "http:///DSAMElementTypes"
+       class = "br.pucrio.inf.les.genarch.models.dsamtypes.DsamtypesPackage"
+       genModel = "metamodel/JadeDSAM.genmodel" /> 
+  </extension>
+
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package
+       uri = "http:///ImplementationMetaModel.ecore"
+       class = "br.pucrio.inf.les.genarch.models.implementation.ImplementationPackage"
+       genModel = "metamodel/JadeDSAM.genmodel" /> 
+  </extension>
+
+
+  <extension
+    point = "org.eclipse.ui.newWizards">
+    <category
+      id = "org.eclipse.emf.ecore.Wizard.category.ID"
+      name="%_UI_Wizard_category">
+    </category>
+    <wizard
+      id = "br.pucrio.inf.les.genarch.extension.dsam.jade.presentation.JadeModelWizardID"
+      name = "%_UI_JadeModelWizard_label"
+      class = "br.pucrio.inf.les.genarch.extension.dsam.jade.presentation.JadeModelWizard"
+      category = "org.eclipse.emf.ecore.Wizard.category.ID"
+      icon = "icons/full/obj16/JadeModelFile.gif">
+      <description>%_UI_JadeModelWizard_description</description>
+      <selection class = "org.eclipse.core.resources.IResource" />
+    </wizard>
+  </extension>
+
+  <extension point = "org.eclipse.ui.editors">
+    <editor
+        id = "br.pucrio.inf.les.genarch.extension.dsam.jade.presentation.JadeEditorID"
+        name = "%_UI_JadeEditor_label"
+        icon = "icons/full/obj16/JadeModelFile.gif"
+        extensions = "jade"
+        class = "br.pucrio.inf.les.genarch.extension.dsam.jade.presentation.JadeEditor" 
+        contributorClass="br.pucrio.inf.les.genarch.extension.dsam.jade.presentation.JadeActionBarContributor" >
+    </editor>
+  </extension>    
+
+  <extension
+    point = "org.eclipse.ui.newWizards">
+    <category
+      id = "org.eclipse.emf.ecore.Wizard.category.ID"
+      name="%_UI_Wizard_category">
+    </category>
+    <wizard
+      id = "br.pucrio.inf.les.genarch.models.dsamtypes.presentation.DsamtypesModelWizardID"
+      name = "%_UI_DsamtypesModelWizard_label"
+      class = "br.pucrio.inf.les.genarch.models.dsamtypes.presentation.DsamtypesModelWizard"
+      category = "org.eclipse.emf.ecore.Wizard.category.ID"
+      icon = "icons/full/obj16/DsamtypesModelFile.gif">
+      <description>%_UI_DsamtypesModelWizard_description</description>
+      <selection class = "org.eclipse.core.resources.IResource" />
+    </wizard>
+  </extension>
+
+  <extension point = "org.eclipse.ui.editors">
+    <editor
+        id = "br.pucrio.inf.les.genarch.models.dsamtypes.presentation.DsamtypesEditorID"
+        name = "%_UI_DsamtypesEditor_label"
+        icon = "icons/full/obj16/DsamtypesModelFile.gif"
+        extensions = "dsamtypes"
+        class = "br.pucrio.inf.les.genarch.models.dsamtypes.presentation.DsamtypesEditor" 
+        contributorClass="br.pucrio.inf.les.genarch.models.dsamtypes.presentation.DsamtypesActionBarContributor" >
+    </editor>
+  </extension>    
+
+  <extension
+    point = "org.eclipse.ui.newWizards">
+    <category
+      id = "org.eclipse.emf.ecore.Wizard.category.ID"
+      name="%_UI_Wizard_category">
+    </category>
+    <wizard
+      id = "br.pucrio.inf.les.genarch.models.implementation.presentation.ImplementationModelWizardID"
+      name = "%_UI_ImplementationModelWizard_label"
+      class = "br.pucrio.inf.les.genarch.models.implementation.presentation.ImplementationModelWizard"
+      category = "org.eclipse.emf.ecore.Wizard.category.ID"
+      icon = "icons/full/obj16/ImplementationModelFile.gif">
+      <description>%_UI_ImplementationModelWizard_description</description>
+      <selection class = "org.eclipse.core.resources.IResource" />
+    </wizard>
+  </extension>
+
+  <extension point = "org.eclipse.ui.editors">
+    <editor
+        id = "br.pucrio.inf.les.genarch.models.implementation.presentation.ImplementationEditorID"
+        name = "%_UI_ImplementationEditor_label"
+        icon = "icons/full/obj16/ImplementationModelFile.gif"
+        extensions = "implementation"
+        class = "br.pucrio.inf.les.genarch.models.implementation.presentation.ImplementationEditor" 
+        contributorClass="br.pucrio.inf.les.genarch.models.implementation.presentation.ImplementationActionBarContributor" >
+    </editor>
+  </extension>    
+</plugin>
