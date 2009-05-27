@@ -14,8 +14,8 @@
          name="MasDomainModel"
          point="br.pucrio.inf.les.genarch.domainModel">
          <model
-               ePackageClass="br.pucrio.inf.les.genarch.extension.mas.MasPackage"
-               itemProviderAdapterFactory="br.pucrio.inf.les.genarch.extension.mas.provider.MasItemProviderAdapterFactory"
+               ePackageClass="br.pucrio.inf.les.genarch.extension.dsam.mas.MasPackage"
+               itemProviderAdapterFactory="br.pucrio.inf.les.genarch.extension.dsam.mas.provider.MasItemProviderAdapterFactory"
                name="Mas"
                referenceName="mas"/>
    </extension>
@@ -24,13 +24,13 @@
          name="MasDomainModelExtractor"
          point="br.pucrio.inf.les.genarch.domainModelExtractor">
          <extractor
-               class="br.pucrio.inf.les.genarch.extension.mas.extractor.MasExtractor"
+               class="br.pucrio.inf.les.genarch.extension.dsam.mas.extractor.MasExtractor"
                name="MasExtractor"/>
    </extension>
   <extension point="org.eclipse.emf.edit.itemProviderAdapterFactories">
     <factory 
        uri = "http:///MasDomainModel.ecore" 
-       class = "br.pucrio.inf.les.genarch.extension.mas.provider.MasItemProviderAdapterFactory"
+       class = "br.pucrio.inf.les.genarch.extension.dsam.mas.provider.MasItemProviderAdapterFactory"
        supportedTypes = 
          "org.eclipse.emf.edit.provider.IEditingDomainItemProvider
           org.eclipse.emf.edit.provider.IStructuredItemContentProvider
@@ -41,7 +41,7 @@
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package
        uri = "http:///MasDomainModel.ecore"
-       class = "br.pucrio.inf.les.genarch.extension.mas.MasPackage"
+       class = "br.pucrio.inf.les.genarch.extension.dsam.mas.MasPackage"
        genModel = "metamodel/MasDomainModel.genmodel" /> 
   </extension>
   <extension point = "org.eclipse.ui.editors">
