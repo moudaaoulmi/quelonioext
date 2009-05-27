@@ -9,6 +9,7 @@ Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: br.pucrio.inf.les.genarch.extension.dsam.springdm,
+ br.pucrio.inf.les.genarch.extension.dsam.springdm.extractor,
  br.pucrio.inf.les.genarch.extension.dsam.springdm.impl,
  br.pucrio.inf.les.genarch.extension.dsam.springdm.provider,
  br.pucrio.inf.les.genarch.extension.dsam.springdm.util
