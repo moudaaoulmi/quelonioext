@@ -10,7 +10,7 @@
 
 <plugin>
 <extension
-         id="br.pucrio.inf.les.genarch.extension.dsam.spring.dsm"
+         id="br.pucrio.inf.les.genarch.extension.dsam.springdm"
          name="SpringDSM"
          point="br.pucrio.inf.les.genarch.domainModel">
          <model
@@ -21,12 +21,12 @@
      </model>
    </extension>
    <extension
-         id="br.pucrio.inf.les.genarch.extension.dsam.deployment.extractor"
-         name="DeploymentDSMExtractor"
+         id="br.pucrio.inf.les.genarch.extension.dsam.springdm.extractor"
+         name="SpringDMExtractor"
          point="br.pucrio.inf.les.genarch.domainModelExtractor">     
      <extractor
-           class="br.pucrio.inf.les.genarch.extension.dsam.spring.extractor.SpringdmExtractor"
-           name="SpringExtractor">
+           class="br.pucrio.inf.les.genarch.extension.dsam.springdm.extractor.SpringdmExtractor"
+           name="SpringDMExtractor">
      </extractor>
    </extension>
 
