@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+ <copyright>
+ </copyright>
+
+ $Id$
+-->
+
+<plugin>
+<extension
+         id="br.pucrio.inf.les.genarch.extension.dsam.spring.dsm"
+         name="SpringDSM"
+         point="br.pucrio.inf.les.genarch.domainModel">
+         <model
+           ePackageClass="br.pucrio.inf.les.genarch.extension.dsam.springdm.SpringdmPackage"
+           itemProviderAdapterFactory="br.pucrio.inf.les.genarch.extension.dsam.springdm.provider.SpringdmItemProviderAdapterFactory"
+           name="SpringDM"
+           referenceName="springdm">
+     </model>
+   </extension>
+   <extension
+         id="br.pucrio.inf.les.genarch.extension.dsam.deployment.extractor"
+         name="DeploymentDSMExtractor"
+         point="br.pucrio.inf.les.genarch.domainModelExtractor">     
+     <extractor
+           class="br.pucrio.inf.les.genarch.extension.dsam.spring.extractor.SpringdmExtractor"
+           name="SpringExtractor">
+     </extractor>
+   </extension>
+
+  
+  <extension point = "org.eclipse.ui.editors">
+    <editor
+        id = "br.pucrio.inf.les.genarch.models.domain.editor.DomainModelEditorID"
+        name = "Domain Model Editor"
+        icon = "icons/full/obj16/SpringModelFile.gif"
+        extensions = "springdm"
+        class = "br.pucrio.inf.les.genarch.models.domain.editor.DomainModelEditor" 
+        contributorClass="br.pucrio.inf.les.genarch.models.domain.editor.DomainModelActionBarContributor" >
+    </editor>
+  </extension>    
+
+  <extension point="org.eclipse.emf.edit.itemProviderAdapterFactories">
+    <factory 
+       uri = "http:///SpringOSGiDomainModel.ecore" 
+       class = "br.pucrio.inf.les.genarch.extension.dsam.springdm.provider.SpringdmItemProviderAdapterFactory"
+       supportedTypes = 
+         "org.eclipse.emf.edit.provider.IEditingDomainItemProvider
+          org.eclipse.emf.edit.provider.IStructuredItemContentProvider
+          org.eclipse.emf.edit.provider.ITreeItemContentProvider
+          org.eclipse.emf.edit.provider.IItemLabelProvider
+          org.eclipse.emf.edit.provider.IItemPropertySource" />
+  </extension>
+  
+  
+  
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package
+       uri = "http:///SpringOSGiDomainModel.ecore"
+       class = "br.pucrio.inf.les.genarch.extension.dsam.springdm.SpringdmPackage"
+       genModel = "metamodel/SpringDMDomainModel.genmodel" /> 
+  </extension>
+
+
+
+
+
+
+
+
+
+</plugin>
