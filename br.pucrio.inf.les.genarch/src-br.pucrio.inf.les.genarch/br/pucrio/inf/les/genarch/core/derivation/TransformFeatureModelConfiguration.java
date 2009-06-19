@@ -8,6 +8,9 @@ import br.pucrio.inf.les.genarch.models.product.ProductPackage;
 import ca.uwaterloo.gp.fmp.Feature;
 import ca.uwaterloo.gp.fmp.FeatureGroup;
 import ca.uwaterloo.gp.fmp.Project;
+import ca.uwaterloo.gp.fmp.constraints.ModelToPropositionTranslator;
+import ca.uwaterloo.gp.fmp.constraints.PropositionalFormula;
+import ca.uwaterloo.gp.fmp.system.RoleQuery;
 
 public class TransformFeatureModelConfiguration {
 
@@ -18,6 +21,11 @@ public class TransformFeatureModelConfiguration {
 
 		Feature modelChild = (Feature)modelChildren.get(0);
 		EList modelChildConfs = modelChild.getConfs();
+		
+		ModelToPropositionTranslator modelToPropositionTranslator = new ModelToPropositionTranslator();
+		PropositionalFormula propositionalFormula = modelToPropositionTranslator.translate(modelChild, true);
+		
+		System.out.println(propositionalFormula.getRules());
 
 		Feature childConf = (Feature)modelChildConfs.get(configurationIndex);
 
@@ -52,11 +60,11 @@ public class TransformFeatureModelConfiguration {
 		featureConfiguration.setMax(max);
 		featureConfiguration.setMin(min);
 
-		boolean checked = false;
+		boolean checked = true;
 
 		if ( fmpFeature.isOptional() ) {			
-			if ( (fmpFeature.getState().getValue() == 1) || (fmpFeature.getState().getValue() == 3) ) {
-				checked = true;				
+			if ( (fmpFeature.getState().getValue() != 1) && (fmpFeature.getState().getValue() != 3) ) {
+				checked = false;				
 			}
 		} 
 

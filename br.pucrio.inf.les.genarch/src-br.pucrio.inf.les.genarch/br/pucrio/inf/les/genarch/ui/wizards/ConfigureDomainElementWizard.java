@@ -252,7 +252,7 @@ public class ConfigureDomainElementWizard extends Wizard implements INewWizard {
 				}
 			}
 									
-			configurationModel.add().domainModelElement(domainModelName(genarchProjectConfigurationFile.getDomainModelsFiles()), eElement);
+			configurationModel.add().domainModelElement(domainModelName(genarchProjectConfigurationFile.getDomainModelsFiles()),eElement);
 		}
 
 		configurationModel.save();
