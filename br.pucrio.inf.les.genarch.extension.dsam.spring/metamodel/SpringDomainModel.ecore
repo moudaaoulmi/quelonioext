@@ -7,13 +7,13 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="beans" lowerBound="1" upperBound="-1"
         eType="#//Bean" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Bean" eSuperTypes="DSAMElementTypes.ecore#//GroupClass">
+  <eClassifiers xsi:type="ecore:EClass" name="Bean" eSuperTypes="DSAMElementTypes.ecore#//GroupClass DSAMElementTypes.ecore#//VariableElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="variants" upperBound="-1"
         eType="#//BeanVariant" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="interface" lowerBound="1"
         eType="#//Interface" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="BeanVariant" eSuperTypes="DSAMElementTypes.ecore#//GroupClass DSAMElementTypes.ecore#//GroupFragments">
+  <eClassifiers xsi:type="ecore:EClass" name="BeanVariant" eSuperTypes="DSAMElementTypes.ecore#//GroupClass DSAMElementTypes.ecore#//GroupFragments DSAMElementTypes.ecore#//VariableElement">
     <eAnnotations source="XML">
       <details key="prop" value="Bean"/>
       <details key="attr" value="name"/>
