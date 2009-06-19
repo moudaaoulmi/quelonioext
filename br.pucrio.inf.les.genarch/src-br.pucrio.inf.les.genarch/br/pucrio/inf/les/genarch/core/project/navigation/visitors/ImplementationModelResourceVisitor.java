@@ -54,6 +54,7 @@ public class ImplementationModelResourceVisitor implements ResourceClient {
 			EObject parent = architectureContent.getElementByPath(componentParentPath);
 
 			if ( file.getFileExtension().equals("java") ) {
+				System.out.println(resourceName);
 				this.architectureContent.addClass(resourceName,resourcePhysicalPath,(ImplementationComponent)parent);
 			} else if ( file.getFileExtension().equals("aj") ) {
 				this.architectureContent.addAspect(resourceName,resourcePhysicalPath,(ImplementationComponent)parent);

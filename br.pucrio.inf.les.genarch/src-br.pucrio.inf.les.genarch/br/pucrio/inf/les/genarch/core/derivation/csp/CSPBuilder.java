@@ -119,16 +119,16 @@ public class CSPBuilder {
 		while ( configurationAC.hasNext() ) {
 			ProductFeatureConfiguration child = (ProductFeatureConfiguration)configurationAC.next();
 
-			String name = child.getName();
-			int isSelected = child.isIsSelected() ? 1 : 0;
+			String name = child.getName();								
+			int domain = child.isIsSelected() ? 1 : 0;
 
-			IntegerVariable variable = makeIntVar(name,isSelected,isSelected);			
+			IntegerVariable variable = makeIntVar(name,domain,domain);			
 			mFeatureModel.addVariable(variable);
 			mModels.addVariable(variable);
 			featureModelVariables.put(name, variable);
 		}
 
-		//TODO Build Constraints	
+		//TODO Build Constraints
 	}
 
 	public void buildArchitectureModelCSP(ProductImplementationElements pie, MappingRelationships mr) {
@@ -559,19 +559,24 @@ public class CSPBuilder {
 		}
 		
 		TreeIterator architectureAC = pie.eAllContents();
+		ArrayList tmpArchitectureAC = new ArrayList();
 
 		while ( architectureAC.hasNext() ) {
 			EObject o = (EObject)architectureAC.next();
-
+			
 			if ( o instanceof ProductEntity ) {
-				ProductEntity pEChild = (ProductEntity)o;
-				String name = pEChild.getName();
+				tmpArchitectureAC.add(o);				
+			}
+		}
+		
+		for ( int x = 0; x < tmpArchitectureAC.size(); x++ ) {
+			ProductEntity pEChild = (ProductEntity)tmpArchitectureAC.get(x);
+			String name = pEChild.getName();
 
-				IntDomainVar variable = solverArchitectureModel.getVar(this.architectureModelVariables.get(name));
-				
-				if ( variable.getVal() == 0 ) {
-					EcoreUtil.remove(o);
-				}
+			IntDomainVar variable = solverArchitectureModel.getVar(this.architectureModelVariables.get(name));
+			
+			if ( variable.getVal() == 0 ) {
+				EcoreUtil.remove(pEChild);
 			}
 		}
 		
