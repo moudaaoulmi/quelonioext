@@ -140,6 +140,7 @@ public class DerivateImplementationElements implements IPostProcessor {
 			IFile newEntityFile = this.derivationProject.getFile(element.getPath());
 
 			if ( "java".equals(newEntityFile.getFileExtension()) ) {
+				System.out.println(newEntityFile.getFullPath().toString());
 				JavaAnnotationUtil.removeFeatureAnnotations(newEntityFile);
 				JavaAnnotationUtil.removeVariabilityAnnotation(newEntityFile);				
 			} else if ( "aj".equals(newEntityFile.getFileExtension())) {

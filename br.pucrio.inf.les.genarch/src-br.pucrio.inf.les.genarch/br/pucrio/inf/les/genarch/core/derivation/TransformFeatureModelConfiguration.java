@@ -10,7 +10,6 @@ import ca.uwaterloo.gp.fmp.FeatureGroup;
 import ca.uwaterloo.gp.fmp.Project;
 import ca.uwaterloo.gp.fmp.constraints.ModelToPropositionTranslator;
 import ca.uwaterloo.gp.fmp.constraints.PropositionalFormula;
-import ca.uwaterloo.gp.fmp.system.RoleQuery;
 
 public class TransformFeatureModelConfiguration {
 
@@ -36,7 +35,7 @@ public class TransformFeatureModelConfiguration {
 			productFeatureConfiguration.setAttribute(childConf.getTypedValue().getStringValue());
 		}
 
-		for ( Object child : childConf.getChildren() ) {
+		for ( Object child : childConf.getChildren() ) {			
 			Feature fmpFeature = (Feature)child;
 			productFeatureConfiguration.getFeatures().add(toFeature((Feature)child));
 		}			
