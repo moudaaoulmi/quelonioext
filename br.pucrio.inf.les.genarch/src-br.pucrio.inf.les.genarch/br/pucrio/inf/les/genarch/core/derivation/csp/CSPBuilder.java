@@ -157,18 +157,21 @@ public class CSPBuilder {
 			TreeIterator cAC = container.eAllContents();
 
 			while ( cAC.hasNext() ) {
-				MappingEntity meChild = (MappingEntity)cAC.next();
-				String featureExpression = meChild.getFeatureExpression().getExpression();
+				MappingEntity meChild = (MappingEntity)cAC.next();				
 
-				IExpression expression;
-				try {
-					expression = Logic.parseExpression(featureExpression);
-					Constraint ls = expression.accept(new CSPIExpressionVisitor(featureModelVariables,sel));
-					Constraint rs = eq(architectureModelVariables.get(meChild.getName()),sel);					
-					Constraint implConstraint = ifOnlyIf(ls,rs);
-					mModels.addConstraint(implConstraint);
-				} catch (Exception e) {
-					e.printStackTrace();
+				if ( meChild.getFeatureExpression() != null ) {
+					String featureExpression = meChild.getFeatureExpression().getExpression(); 
+
+					IExpression expression;
+					try {
+						expression = Logic.parseExpression(featureExpression);
+						Constraint ls = expression.accept(new CSPIExpressionVisitor(featureModelVariables,sel));
+						Constraint rs = eq(architectureModelVariables.get(meChild.getName()),sel);					
+						Constraint implConstraint = ifOnlyIf(ls,rs);
+						mModels.addConstraint(implConstraint);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
 				}
 			}
 		}
@@ -180,18 +183,21 @@ public class CSPBuilder {
 
 			while ( cAC.hasNext() ) {
 				MappingEntity meChild = (MappingEntity)cAC.next();
-				String featureExpression = meChild.getFeatureExpression().getExpression();
 
-				IExpression expression;
-				try {
-					expression = Logic.parseExpression(featureExpression);
-					Constraint ls = expression.accept(new CSPIExpressionVisitor(featureModelVariables,sel));
-					Constraint rs = eq(architectureModelVariables.get(meChild.getName()),sel);
-					Constraint implConstraint = ifOnlyIf(ls,rs);
-					mModels.addConstraint(implConstraint);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}	
+				if ( meChild.getFeatureExpression() != null ) {			
+					String featureExpression = meChild.getFeatureExpression().getExpression();
+
+					IExpression expression;
+					try {
+						expression = Logic.parseExpression(featureExpression);
+						Constraint ls = expression.accept(new CSPIExpressionVisitor(featureModelVariables,sel));
+						Constraint rs = eq(architectureModelVariables.get(meChild.getName()),sel);
+						Constraint implConstraint = ifOnlyIf(ls,rs);
+						mModels.addConstraint(implConstraint);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
 			}
 		}
 
@@ -202,18 +208,21 @@ public class CSPBuilder {
 
 			while ( cAC.hasNext() ) {
 				MappingEntity meChild = (MappingEntity)cAC.next();
-				String featureExpression = meChild.getFeatureExpression().getExpression();
 
-				IExpression expression;
-				try {
-					expression = Logic.parseExpression(featureExpression);
-					Constraint ls = expression.accept(new CSPIExpressionVisitor(featureModelVariables,sel));
-					Constraint rs = eq(architectureModelVariables.get(meChild.getName()),sel);					
-					Constraint implConstraint = ifOnlyIf(ls,rs);
-					mModels.addConstraint(implConstraint);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}							
+				if ( meChild.getFeatureExpression() != null ) {
+					String featureExpression = meChild.getFeatureExpression().getExpression();
+
+					IExpression expression;
+					try {
+						expression = Logic.parseExpression(featureExpression);
+						Constraint ls = expression.accept(new CSPIExpressionVisitor(featureModelVariables,sel));
+						Constraint rs = eq(architectureModelVariables.get(meChild.getName()),sel);					
+						Constraint implConstraint = ifOnlyIf(ls,rs);
+						mModels.addConstraint(implConstraint);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
 			}
 		}
 	}
@@ -501,9 +510,9 @@ public class CSPBuilder {
 				mModels.addConstraint(implConstraint);
 			}
 		}
-		
+
 		i = findElementsByType(DsamtypesPackage.eINSTANCE.getIntraDependence(),domainModel.eContents());
-		
+
 		while ( i.hasNext() ) {
 			EObject o = (EObject)i.next();
 			IntraDependence intraDependenceElement = (IntraDependence)o;
@@ -526,11 +535,11 @@ public class CSPBuilder {
 		} catch (ContradictionException e) {			
 			System.out.println("Without solution.");					
 		}
-						
+
 		for ( String key : this.architectureModelVariables.keySet() ) {
 			IntDomainVar variable = solverArchitectureModel.getVar(this.architectureModelVariables.get(key)); 
 			int value = variable.getVal();
-			
+
 			if ( value != 1 && value != 0 ) {
 				try {
 					variable.setMin(1);
@@ -540,12 +549,12 @@ public class CSPBuilder {
 				}				
 			}	
 		}
-		
+
 		for ( String key : this.domainModelsVariables.keySet() ) {
 			for ( String sKey : this.domainModelsVariables.get(key).keySet() ) {
 				IntDomainVar variable = solverArchitectureModel.getVar(this.domainModelsVariables.get(key).get(sKey)); 
 				int value = variable.getVal();
-				
+
 				if ( value != 1 && value != 0 ) {
 					try {
 						variable.setMin(1);
@@ -557,41 +566,41 @@ public class CSPBuilder {
 				System.out.println(sKey + ": " + variable.getVal());				
 			}
 		}
-		
+
 		TreeIterator architectureAC = pie.eAllContents();
 		ArrayList tmpArchitectureAC = new ArrayList();
 
 		while ( architectureAC.hasNext() ) {
 			EObject o = (EObject)architectureAC.next();
-			
+
 			if ( o instanceof ProductEntity ) {
 				tmpArchitectureAC.add(o);				
 			}
 		}
-		
+
 		for ( int x = 0; x < tmpArchitectureAC.size(); x++ ) {
 			ProductEntity pEChild = (ProductEntity)tmpArchitectureAC.get(x);
 			String name = pEChild.getName();
 
 			IntDomainVar variable = solverArchitectureModel.getVar(this.architectureModelVariables.get(name));
-			
+
 			if ( variable.getVal() == 0 ) {
 				EcoreUtil.remove(pEChild);
 			}
 		}
-		
+
 		for ( ProductDomainModel productDomainModel : productDomainModels ) {
 			Map<String,EObject> domainModelAC = productDomainModel.getElements();
 			Set<String> domainModelACKeys = domainModelAC.keySet();
-			
+
 			Map<String,IntegerVariable> domainModelVariable = domainModelsVariables.get(productDomainModel.getName());
 
 			for ( String key : domainModelACKeys ) {
 				DomainElement pde = (DomainElement)domainModelAC.get(key);
 				String name = pde.getName();
-				
+
 				IntDomainVar variable = solverArchitectureModel.getVar(domainModelVariable.get(name));
-				
+
 				if ( variable.getVal() == 0 ) {
 					EcoreUtil.remove(pde);
 				}
