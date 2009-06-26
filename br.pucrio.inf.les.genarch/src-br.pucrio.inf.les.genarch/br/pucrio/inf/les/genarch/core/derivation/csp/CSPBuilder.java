@@ -157,20 +157,23 @@ public class CSPBuilder {
 			TreeIterator cAC = container.eAllContents();
 
 			while ( cAC.hasNext() ) {
-				MappingEntity meChild = (MappingEntity)cAC.next();				
+				EObject cACO = (EObject)cAC.next();
+				if ( cACO instanceof MappingEntity ) {
+					MappingEntity meChild = (MappingEntity)cACO;				
 
-				if ( meChild.getFeatureExpression() != null ) {
-					String featureExpression = meChild.getFeatureExpression().getExpression(); 
+					if ( meChild.getFeatureExpression() != null ) {
+						String featureExpression = meChild.getFeatureExpression().getExpression(); 
 
-					IExpression expression;
-					try {
-						expression = Logic.parseExpression(featureExpression);
-						Constraint ls = expression.accept(new CSPIExpressionVisitor(featureModelVariables,sel));
-						Constraint rs = eq(architectureModelVariables.get(meChild.getName()),sel);					
-						Constraint implConstraint = ifOnlyIf(ls,rs);
-						mModels.addConstraint(implConstraint);
-					} catch (Exception e) {
-						e.printStackTrace();
+						IExpression expression;
+						try {
+							expression = Logic.parseExpression(featureExpression);
+							Constraint ls = expression.accept(new CSPIExpressionVisitor(featureModelVariables,sel));
+							Constraint rs = eq(architectureModelVariables.get(meChild.getName()),sel);					
+							Constraint implConstraint = ifOnlyIf(ls,rs);
+							mModels.addConstraint(implConstraint);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
 					}
 				}
 			}
@@ -182,20 +185,23 @@ public class CSPBuilder {
 			TreeIterator cAC = resourceContainer.eAllContents();
 
 			while ( cAC.hasNext() ) {
-				MappingEntity meChild = (MappingEntity)cAC.next();
+				EObject cACO = (EObject)cAC.next();
+				if ( cACO instanceof MappingEntity ) {
+					MappingEntity meChild = (MappingEntity)cACO;
 
-				if ( meChild.getFeatureExpression() != null ) {			
-					String featureExpression = meChild.getFeatureExpression().getExpression();
+					if ( meChild.getFeatureExpression() != null ) {			
+						String featureExpression = meChild.getFeatureExpression().getExpression();
 
-					IExpression expression;
-					try {
-						expression = Logic.parseExpression(featureExpression);
-						Constraint ls = expression.accept(new CSPIExpressionVisitor(featureModelVariables,sel));
-						Constraint rs = eq(architectureModelVariables.get(meChild.getName()),sel);
-						Constraint implConstraint = ifOnlyIf(ls,rs);
-						mModels.addConstraint(implConstraint);
-					} catch (Exception e) {
-						e.printStackTrace();
+						IExpression expression;
+						try {
+							expression = Logic.parseExpression(featureExpression);
+							Constraint ls = expression.accept(new CSPIExpressionVisitor(featureModelVariables,sel));
+							Constraint rs = eq(architectureModelVariables.get(meChild.getName()),sel);
+							Constraint implConstraint = ifOnlyIf(ls,rs);
+							mModels.addConstraint(implConstraint);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
 					}
 				}
 			}
@@ -207,20 +213,23 @@ public class CSPBuilder {
 			TreeIterator cAC = fragmentContainer.eAllContents();
 
 			while ( cAC.hasNext() ) {
-				MappingEntity meChild = (MappingEntity)cAC.next();
+				EObject cACO = (EObject)cAC.next();
+				if ( cACO instanceof MappingEntity ) {
+					MappingEntity meChild = (MappingEntity)cACO;
 
-				if ( meChild.getFeatureExpression() != null ) {
-					String featureExpression = meChild.getFeatureExpression().getExpression();
+					if ( meChild.getFeatureExpression() != null ) {
+						String featureExpression = meChild.getFeatureExpression().getExpression();
 
-					IExpression expression;
-					try {
-						expression = Logic.parseExpression(featureExpression);
-						Constraint ls = expression.accept(new CSPIExpressionVisitor(featureModelVariables,sel));
-						Constraint rs = eq(architectureModelVariables.get(meChild.getName()),sel);					
-						Constraint implConstraint = ifOnlyIf(ls,rs);
-						mModels.addConstraint(implConstraint);
-					} catch (Exception e) {
-						e.printStackTrace();
+						IExpression expression;
+						try {
+							expression = Logic.parseExpression(featureExpression);
+							Constraint ls = expression.accept(new CSPIExpressionVisitor(featureModelVariables,sel));
+							Constraint rs = eq(architectureModelVariables.get(meChild.getName()),sel);					
+							Constraint implConstraint = ifOnlyIf(ls,rs);
+							mModels.addConstraint(implConstraint);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
 					}
 				}
 			}
