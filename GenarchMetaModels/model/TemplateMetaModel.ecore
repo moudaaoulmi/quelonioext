@@ -63,9 +63,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="ProductTemplate" eSuperTypes="#//ProductEntity">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="generateToPath" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ProductFragment">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
-        defaultValueLiteral=""/>
+  <eClassifiers xsi:type="ecore:EClass" name="ProductFragment" eSuperTypes="#//ProductEntity">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="content" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         defaultValueLiteral=""/>
   </eClassifiers>
