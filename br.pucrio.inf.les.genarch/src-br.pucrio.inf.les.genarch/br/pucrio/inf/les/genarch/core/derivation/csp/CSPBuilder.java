@@ -556,7 +556,8 @@ public class CSPBuilder {
 				} catch (ContradictionException e) {
 					e.printStackTrace();
 				}				
-			}	
+			}
+			System.out.println(key + " : " + variable.getVal());
 		}
 
 		for ( String key : this.domainModelsVariables.keySet() ) {
@@ -572,7 +573,7 @@ public class CSPBuilder {
 						e.printStackTrace();
 					}				
 				}
-				System.out.println(sKey + ": " + variable.getVal());				
+				System.out.println(sKey + " : " + variable.getVal());				
 			}
 		}
 

@@ -125,6 +125,7 @@ public class TransformArchModels {
 				ProductFragment fragmentInstanceTwo = ProductPackage.eINSTANCE.getProductFactory().createProductFragment();
 				fragmentInstanceTwo.setName(fragment.getName());
 				fragmentInstanceTwo.setContent(fragment.getContent());
+				fragmentInstanceTwo.setPath(fragment.getPath());
 				
 				productFragmentContainer.getFragments().add(fragmentInstanceTwo);
 			}

@@ -11,9 +11,13 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 
+import br.pucrio.inf.les.genarch.core.models.dsl.implementation.ImplementationModelHandle;
 import br.pucrio.inf.les.genarch.core.plugin.GenArchEMFPlugin;
+import br.pucrio.inf.les.genarch.models.implementation.ImplementationPackage;
+import br.pucrio.inf.les.genarch.models.implementation.ImplementationTemplate;
 
 public class ConvertFileToTemplate implements IRunnableWithProgress {
 
@@ -60,6 +64,18 @@ public class ConvertFileToTemplate implements IRunnableWithProgress {
 			inputStream.close();
 			
 			file.delete(false,progressMonitor);
+			
+			ImplementationTemplate implementationTemplate = ImplementationPackage.eINSTANCE.getImplementationFactory().createImplementationTemplate();
+			implementationTemplate.setGenerationPath(file.getProjectRelativePath().removeLastSegments(1).toString());
+			implementationTemplate.setName(file.getName() + ".xpt");
+			implementationTemplate.setPath(file.getProjectRelativePath().append(file.getName() + ".xpt").toString());
+			
+			ImplementationModelHandle implementationModel = ImplementationModelHandle.implementationModel(file.getProject());
+			implementationModel.add().template(implementationTemplate);
+			
+			EcoreUtil.remove(implementationModel.get().clazz(file.getProjectRelativePath().toString()));
+			
+			implementationModel.save();
 		} catch (CoreException e) {
 			GenArchEMFPlugin.INSTANCE.log(e);
 		} catch (IOException e) {
