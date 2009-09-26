@@ -16,7 +16,7 @@ import br.pucrio.inf.les.genarch.models.dsamtypes.VariableElement;
  *
  *
  * @see br.pucrio.inf.les.genarch.extension.dsam.mas.MasPackage#getBelief()
- * @model
+ * @model annotation="XML prop='beliefref' attr='name'"
  * @generated
  */
 public interface Belief extends VariableElement, GroupFragments {

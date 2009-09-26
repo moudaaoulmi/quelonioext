@@ -87,6 +87,8 @@ public class CapabilityItemProvider
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(DsamtypesPackage.Literals.GROUP_TEMPLATES__TEMPLATES);
+			childrenFeatures.add(DsamtypesPackage.Literals.GROUP_COMPONENTS__COMPONENTS);
+			childrenFeatures.add(DsamtypesPackage.Literals.GROUP_FILES__FILES);
 			childrenFeatures.add(MasPackage.Literals.CAPABILITY__GOALS);
 			childrenFeatures.add(MasPackage.Literals.CAPABILITY__BELIEVES);
 			childrenFeatures.add(MasPackage.Literals.CAPABILITY__PLANS);
@@ -148,6 +150,8 @@ public class CapabilityItemProvider
 
 		switch (notification.getFeatureID(Capability.class)) {
 			case MasPackage.CAPABILITY__TEMPLATES:
+			case MasPackage.CAPABILITY__COMPONENTS:
+			case MasPackage.CAPABILITY__FILES:
 			case MasPackage.CAPABILITY__GOALS:
 			case MasPackage.CAPABILITY__BELIEVES:
 			case MasPackage.CAPABILITY__PLANS:
@@ -178,6 +182,16 @@ public class CapabilityItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(DsamtypesPackage.Literals.GROUP_COMPONENTS__COMPONENTS,
+				 ImplementationFactory.eINSTANCE.createImplementationComponent()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(DsamtypesPackage.Literals.GROUP_FILES__FILES,
+				 ImplementationFactory.eINSTANCE.createImplementationFile()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(MasPackage.Literals.CAPABILITY__GOALS,
 				 MasFactory.eINSTANCE.createGoal()));
 
@@ -204,7 +218,7 @@ public class CapabilityItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(MasPackage.Literals.CAPABILITY__CAPABILITIES,
-				 MasFactory.eINSTANCE.createCapability()));
+				 MasFactory.eINSTANCE.createCapabilityReference()));
 	}
 
 	/**

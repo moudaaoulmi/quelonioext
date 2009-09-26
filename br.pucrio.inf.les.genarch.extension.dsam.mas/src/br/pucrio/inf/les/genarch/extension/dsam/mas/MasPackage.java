@@ -126,13 +126,31 @@ public interface MasPackage extends EPackage {
 	int AGENT__TEMPLATES = DsamtypesPackage.VARIABLE_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Components</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AGENT__COMPONENTS = DsamtypesPackage.VARIABLE_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Files</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AGENT__FILES = DsamtypesPackage.VARIABLE_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
 	 * The feature id for the '<em><b>Capabilities</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int AGENT__CAPABILITIES = DsamtypesPackage.VARIABLE_ELEMENT_FEATURE_COUNT + 1;
+	int AGENT__CAPABILITIES = DsamtypesPackage.VARIABLE_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Goals</b></em>' containment reference list.
@@ -141,7 +159,7 @@ public interface MasPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int AGENT__GOALS = DsamtypesPackage.VARIABLE_ELEMENT_FEATURE_COUNT + 2;
+	int AGENT__GOALS = DsamtypesPackage.VARIABLE_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Believes</b></em>' containment reference list.
@@ -150,7 +168,7 @@ public interface MasPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int AGENT__BELIEVES = DsamtypesPackage.VARIABLE_ELEMENT_FEATURE_COUNT + 3;
+	int AGENT__BELIEVES = DsamtypesPackage.VARIABLE_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Plans</b></em>' containment reference list.
@@ -159,7 +177,7 @@ public interface MasPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int AGENT__PLANS = DsamtypesPackage.VARIABLE_ELEMENT_FEATURE_COUNT + 4;
+	int AGENT__PLANS = DsamtypesPackage.VARIABLE_ELEMENT_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Events</b></em>' containment reference list.
@@ -168,7 +186,7 @@ public interface MasPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int AGENT__EVENTS = DsamtypesPackage.VARIABLE_ELEMENT_FEATURE_COUNT + 5;
+	int AGENT__EVENTS = DsamtypesPackage.VARIABLE_ELEMENT_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Expressions</b></em>' containment reference list.
@@ -177,7 +195,7 @@ public interface MasPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int AGENT__EXPRESSIONS = DsamtypesPackage.VARIABLE_ELEMENT_FEATURE_COUNT + 6;
+	int AGENT__EXPRESSIONS = DsamtypesPackage.VARIABLE_ELEMENT_FEATURE_COUNT + 8;
 
 	/**
 	 * The number of structural features of the '<em>Agent</em>' class.
@@ -186,7 +204,7 @@ public interface MasPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int AGENT_FEATURE_COUNT = DsamtypesPackage.VARIABLE_ELEMENT_FEATURE_COUNT + 7;
+	int AGENT_FEATURE_COUNT = DsamtypesPackage.VARIABLE_ELEMENT_FEATURE_COUNT + 9;
 
 	/**
 	 * The meta object id for the '{@link br.pucrio.inf.les.genarch.extension.dsam.mas.impl.CapabilityImpl <em>Capability</em>}' class.
@@ -217,13 +235,31 @@ public interface MasPackage extends EPackage {
 	int CAPABILITY__TEMPLATES = DsamtypesPackage.VARIABLE_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Components</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CAPABILITY__COMPONENTS = DsamtypesPackage.VARIABLE_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Files</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CAPABILITY__FILES = DsamtypesPackage.VARIABLE_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
 	 * The feature id for the '<em><b>Goals</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CAPABILITY__GOALS = DsamtypesPackage.VARIABLE_ELEMENT_FEATURE_COUNT + 1;
+	int CAPABILITY__GOALS = DsamtypesPackage.VARIABLE_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Believes</b></em>' containment reference list.
@@ -232,7 +268,7 @@ public interface MasPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CAPABILITY__BELIEVES = DsamtypesPackage.VARIABLE_ELEMENT_FEATURE_COUNT + 2;
+	int CAPABILITY__BELIEVES = DsamtypesPackage.VARIABLE_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Plans</b></em>' containment reference list.
@@ -241,7 +277,7 @@ public interface MasPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CAPABILITY__PLANS = DsamtypesPackage.VARIABLE_ELEMENT_FEATURE_COUNT + 3;
+	int CAPABILITY__PLANS = DsamtypesPackage.VARIABLE_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Events</b></em>' containment reference list.
@@ -250,7 +286,7 @@ public interface MasPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CAPABILITY__EVENTS = DsamtypesPackage.VARIABLE_ELEMENT_FEATURE_COUNT + 4;
+	int CAPABILITY__EVENTS = DsamtypesPackage.VARIABLE_ELEMENT_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Expressions</b></em>' containment reference list.
@@ -259,7 +295,7 @@ public interface MasPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CAPABILITY__EXPRESSIONS = DsamtypesPackage.VARIABLE_ELEMENT_FEATURE_COUNT + 5;
+	int CAPABILITY__EXPRESSIONS = DsamtypesPackage.VARIABLE_ELEMENT_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Capabilities</b></em>' containment reference list.
@@ -268,7 +304,7 @@ public interface MasPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CAPABILITY__CAPABILITIES = DsamtypesPackage.VARIABLE_ELEMENT_FEATURE_COUNT + 6;
+	int CAPABILITY__CAPABILITIES = DsamtypesPackage.VARIABLE_ELEMENT_FEATURE_COUNT + 8;
 
 	/**
 	 * The number of structural features of the '<em>Capability</em>' class.
@@ -277,7 +313,7 @@ public interface MasPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CAPABILITY_FEATURE_COUNT = DsamtypesPackage.VARIABLE_ELEMENT_FEATURE_COUNT + 7;
+	int CAPABILITY_FEATURE_COUNT = DsamtypesPackage.VARIABLE_ELEMENT_FEATURE_COUNT + 9;
 
 	/**
 	 * The meta object id for the '{@link br.pucrio.inf.les.genarch.extension.dsam.mas.impl.PlanImpl <em>Plan</em>}' class.

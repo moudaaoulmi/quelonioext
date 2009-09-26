@@ -16,7 +16,7 @@ import br.pucrio.inf.les.genarch.models.dsamtypes.VariableElement;
  *
  *
  * @see br.pucrio.inf.les.genarch.extension.dsam.mas.MasPackage#getEvent()
- * @model
+ * @model annotation="XML prop='event' attr='name'"
  * @generated
  */
 public interface Event extends VariableElement, GroupFragments {

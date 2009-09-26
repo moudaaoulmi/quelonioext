@@ -11,6 +11,8 @@ import br.pucrio.inf.les.genarch.extension.dsam.mas.*;
 import br.pucrio.inf.les.genarch.models.dsamtypes.DependenceRelationship;
 import br.pucrio.inf.les.genarch.models.dsamtypes.DomainElement;
 import br.pucrio.inf.les.genarch.models.dsamtypes.GroupClass;
+import br.pucrio.inf.les.genarch.models.dsamtypes.GroupComponents;
+import br.pucrio.inf.les.genarch.models.dsamtypes.GroupFiles;
 import br.pucrio.inf.les.genarch.models.dsamtypes.GroupFragments;
 import br.pucrio.inf.les.genarch.models.dsamtypes.GroupRelationship;
 import br.pucrio.inf.les.genarch.models.dsamtypes.GroupTemplates;
@@ -107,6 +109,8 @@ public class MasSwitch<T> {
 				T result = caseAgent(agent);
 				if (result == null) result = caseVariableElement(agent);
 				if (result == null) result = caseGroupTemplates(agent);
+				if (result == null) result = caseGroupComponents(agent);
+				if (result == null) result = caseGroupFiles(agent);
 				if (result == null) result = caseDomainElement(agent);
 				if (result == null) result = caseGroupRelationship(agent);
 				if (result == null) result = defaultCase(theEObject);
@@ -117,6 +121,8 @@ public class MasSwitch<T> {
 				T result = caseCapability(capability);
 				if (result == null) result = caseVariableElement(capability);
 				if (result == null) result = caseGroupTemplates(capability);
+				if (result == null) result = caseGroupComponents(capability);
+				if (result == null) result = caseGroupFiles(capability);
 				if (result == null) result = caseDomainElement(capability);
 				if (result == null) result = caseGroupRelationship(capability);
 				if (result == null) result = defaultCase(theEObject);
@@ -380,6 +386,36 @@ public class MasSwitch<T> {
 	 * @generated
 	 */
 	public T caseGroupTemplates(GroupTemplates object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Group Components</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Group Components</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseGroupComponents(GroupComponents object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Group Files</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Group Files</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseGroupFiles(GroupFiles object) {
 		return null;
 	}
 

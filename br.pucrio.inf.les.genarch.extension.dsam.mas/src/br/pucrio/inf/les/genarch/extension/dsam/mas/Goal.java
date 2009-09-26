@@ -16,7 +16,7 @@ import br.pucrio.inf.les.genarch.models.dsamtypes.VariableElement;
  *
  *
  * @see br.pucrio.inf.les.genarch.extension.dsam.mas.MasPackage#getGoal()
- * @model
+ * @model annotation="XML prop='goal' attr='name'"
  * @generated
  */
 public interface Goal extends VariableElement, GroupFragments {

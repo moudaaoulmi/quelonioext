@@ -16,7 +16,7 @@ import br.pucrio.inf.les.genarch.models.dsamtypes.VariableElement;
  *
  *
  * @see br.pucrio.inf.les.genarch.extension.dsam.mas.MasPackage#getExpression()
- * @model
+ * @model annotation="XML prop='expression' attr='name'"
  * @generated
  */
 public interface Expression extends VariableElement, GroupFragments {

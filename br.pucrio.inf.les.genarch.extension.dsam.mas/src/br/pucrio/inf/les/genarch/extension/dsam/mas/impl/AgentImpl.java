@@ -16,11 +16,15 @@ import br.pucrio.inf.les.genarch.extension.dsam.mas.MasPackage;
 import br.pucrio.inf.les.genarch.extension.dsam.mas.Plan;
 
 import br.pucrio.inf.les.genarch.models.dsamtypes.DsamtypesPackage;
+import br.pucrio.inf.les.genarch.models.dsamtypes.GroupComponents;
+import br.pucrio.inf.les.genarch.models.dsamtypes.GroupFiles;
 import br.pucrio.inf.les.genarch.models.dsamtypes.GroupRelationship;
 import br.pucrio.inf.les.genarch.models.dsamtypes.GroupTemplates;
 
 import br.pucrio.inf.les.genarch.models.dsamtypes.impl.VariableElementImpl;
 
+import br.pucrio.inf.les.genarch.models.implementation.ImplementationComponent;
+import br.pucrio.inf.les.genarch.models.implementation.ImplementationFile;
 import br.pucrio.inf.les.genarch.models.implementation.ImplementationTemplate;
 
 import java.util.Collection;
@@ -43,6 +47,8 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * <ul>
  *   <li>{@link br.pucrio.inf.les.genarch.extension.dsam.mas.impl.AgentImpl#getTemplates <em>Templates</em>}</li>
+ *   <li>{@link br.pucrio.inf.les.genarch.extension.dsam.mas.impl.AgentImpl#getComponents <em>Components</em>}</li>
+ *   <li>{@link br.pucrio.inf.les.genarch.extension.dsam.mas.impl.AgentImpl#getFiles <em>Files</em>}</li>
  *   <li>{@link br.pucrio.inf.les.genarch.extension.dsam.mas.impl.AgentImpl#getCapabilities <em>Capabilities</em>}</li>
  *   <li>{@link br.pucrio.inf.les.genarch.extension.dsam.mas.impl.AgentImpl#getGoals <em>Goals</em>}</li>
  *   <li>{@link br.pucrio.inf.les.genarch.extension.dsam.mas.impl.AgentImpl#getBelieves <em>Believes</em>}</li>
@@ -64,6 +70,26 @@ public class AgentImpl extends VariableElementImpl implements Agent {
 	 * @ordered
 	 */
 	protected EList<ImplementationTemplate> templates;
+
+	/**
+	 * The cached value of the '{@link #getComponents() <em>Components</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getComponents()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ImplementationComponent> components;
+
+	/**
+	 * The cached value of the '{@link #getFiles() <em>Files</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getFiles()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ImplementationFile> files;
 
 	/**
 	 * The cached value of the '{@link #getCapabilities() <em>Capabilities</em>}' containment reference list.
@@ -161,6 +187,30 @@ public class AgentImpl extends VariableElementImpl implements Agent {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<ImplementationComponent> getComponents() {
+		if (components == null) {
+			components = new EObjectContainmentEList<ImplementationComponent>(ImplementationComponent.class, this, MasPackage.AGENT__COMPONENTS);
+		}
+		return components;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<ImplementationFile> getFiles() {
+		if (files == null) {
+			files = new EObjectContainmentEList<ImplementationFile>(ImplementationFile.class, this, MasPackage.AGENT__FILES);
+		}
+		return files;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<CapabilityReference> getCapabilities() {
 		if (capabilities == null) {
 			capabilities = new EObjectContainmentEList<CapabilityReference>(CapabilityReference.class, this, MasPackage.AGENT__CAPABILITIES);
@@ -238,6 +288,10 @@ public class AgentImpl extends VariableElementImpl implements Agent {
 		switch (featureID) {
 			case MasPackage.AGENT__TEMPLATES:
 				return ((InternalEList<?>)getTemplates()).basicRemove(otherEnd, msgs);
+			case MasPackage.AGENT__COMPONENTS:
+				return ((InternalEList<?>)getComponents()).basicRemove(otherEnd, msgs);
+			case MasPackage.AGENT__FILES:
+				return ((InternalEList<?>)getFiles()).basicRemove(otherEnd, msgs);
 			case MasPackage.AGENT__CAPABILITIES:
 				return ((InternalEList<?>)getCapabilities()).basicRemove(otherEnd, msgs);
 			case MasPackage.AGENT__GOALS:
@@ -264,6 +318,10 @@ public class AgentImpl extends VariableElementImpl implements Agent {
 		switch (featureID) {
 			case MasPackage.AGENT__TEMPLATES:
 				return getTemplates();
+			case MasPackage.AGENT__COMPONENTS:
+				return getComponents();
+			case MasPackage.AGENT__FILES:
+				return getFiles();
 			case MasPackage.AGENT__CAPABILITIES:
 				return getCapabilities();
 			case MasPackage.AGENT__GOALS:
@@ -292,6 +350,14 @@ public class AgentImpl extends VariableElementImpl implements Agent {
 			case MasPackage.AGENT__TEMPLATES:
 				getTemplates().clear();
 				getTemplates().addAll((Collection<? extends ImplementationTemplate>)newValue);
+				return;
+			case MasPackage.AGENT__COMPONENTS:
+				getComponents().clear();
+				getComponents().addAll((Collection<? extends ImplementationComponent>)newValue);
+				return;
+			case MasPackage.AGENT__FILES:
+				getFiles().clear();
+				getFiles().addAll((Collection<? extends ImplementationFile>)newValue);
 				return;
 			case MasPackage.AGENT__CAPABILITIES:
 				getCapabilities().clear();
@@ -332,6 +398,12 @@ public class AgentImpl extends VariableElementImpl implements Agent {
 			case MasPackage.AGENT__TEMPLATES:
 				getTemplates().clear();
 				return;
+			case MasPackage.AGENT__COMPONENTS:
+				getComponents().clear();
+				return;
+			case MasPackage.AGENT__FILES:
+				getFiles().clear();
+				return;
 			case MasPackage.AGENT__CAPABILITIES:
 				getCapabilities().clear();
 				return;
@@ -364,6 +436,10 @@ public class AgentImpl extends VariableElementImpl implements Agent {
 		switch (featureID) {
 			case MasPackage.AGENT__TEMPLATES:
 				return templates != null && !templates.isEmpty();
+			case MasPackage.AGENT__COMPONENTS:
+				return components != null && !components.isEmpty();
+			case MasPackage.AGENT__FILES:
+				return files != null && !files.isEmpty();
 			case MasPackage.AGENT__CAPABILITIES:
 				return capabilities != null && !capabilities.isEmpty();
 			case MasPackage.AGENT__GOALS:
@@ -398,6 +474,18 @@ public class AgentImpl extends VariableElementImpl implements Agent {
 				default: return -1;
 			}
 		}
+		if (baseClass == GroupComponents.class) {
+			switch (derivedFeatureID) {
+				case MasPackage.AGENT__COMPONENTS: return DsamtypesPackage.GROUP_COMPONENTS__COMPONENTS;
+				default: return -1;
+			}
+		}
+		if (baseClass == GroupFiles.class) {
+			switch (derivedFeatureID) {
+				case MasPackage.AGENT__FILES: return DsamtypesPackage.GROUP_FILES__FILES;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -416,6 +504,18 @@ public class AgentImpl extends VariableElementImpl implements Agent {
 		if (baseClass == GroupTemplates.class) {
 			switch (baseFeatureID) {
 				case DsamtypesPackage.GROUP_TEMPLATES__TEMPLATES: return MasPackage.AGENT__TEMPLATES;
+				default: return -1;
+			}
+		}
+		if (baseClass == GroupComponents.class) {
+			switch (baseFeatureID) {
+				case DsamtypesPackage.GROUP_COMPONENTS__COMPONENTS: return MasPackage.AGENT__COMPONENTS;
+				default: return -1;
+			}
+		}
+		if (baseClass == GroupFiles.class) {
+			switch (baseFeatureID) {
+				case DsamtypesPackage.GROUP_FILES__FILES: return MasPackage.AGENT__FILES;
 				default: return -1;
 			}
 		}
