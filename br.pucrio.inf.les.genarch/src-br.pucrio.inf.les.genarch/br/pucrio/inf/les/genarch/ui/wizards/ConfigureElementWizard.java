@@ -188,6 +188,9 @@ public class ConfigureElementWizard extends Wizard implements INewWizard {
 				} else if ( element instanceof ImplementationFolder ) {
 					ConfigurationFolder entity = ConfigurationFolderBuilder.configurationFolder().name(element.getName()).path(element.getPath()).featureExpression(expression).build();
 					configurationModel.add().folder(entity);
+				} else if ( element instanceof ImplementationFragment ) {
+					ConfigurationFragment entity = ConfigurationFragmentBuilder.configurationFragment().name(element.getName()).path(element.getPath()).featureExpression(expression).build();
+					configurationModel.add().fragment(entity);
 				} else {
 					ConfigurationComponent entity = ConfigurationComponentBuilder.configurationComponent().name(element.getName()).path(element.getPath()).featureExpression(expression).build();
 					configurationModel.add().component(entity);
@@ -212,26 +215,6 @@ public class ConfigureElementWizard extends Wizard implements INewWizard {
 			}
 		}
 
-		if ( fragment != null ) {
-			String fragmentPath = fragment.getPath();
-
-			ConfigurationFragment configurationFragment = configurationModel.get().fragment(fragmentPath);
-			
-			if ( configurationFragment != null ) {				
-				if ( configurationFragment.getFeatureExpression() != null ) {
-					configurationFragment.getFeatureExpression().setExpression(expression);
-				} else {
-					FeatureExpression feature = configurationFactory.createFeatureExpression();
-					feature.setExpression(expression);
-					configurationFragment.setFeatureExpression(feature);
-				}
-			} else {
-				configurationFragment = ConfigurationFragmentBuilder.configurationFragment().name(fragment.getName()).path(fragment.getPath()).featureExpression(expression).build(); 
-				configurationModel.add().fragment(configurationFragment);
-			}
-
-		}
-		
 		if ( configurableElement != null ) {
 			String elementName = configurableElement.getName();
 			
