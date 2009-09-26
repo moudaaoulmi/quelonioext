@@ -1,8 +1,16 @@
 package br.pucrio.inf.les.genarch.core.models.dsl.configuration;
 
+import java.util.Iterator;
+
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.query.conditions.eobjects.structuralfeatures.EObjectAttributeValueCondition;
+import org.eclipse.emf.query.conditions.strings.StringValue;
+import org.eclipse.emf.query.statements.FROM;
+import org.eclipse.emf.query.statements.IQueryResult;
+import org.eclipse.emf.query.statements.SELECT;
+import org.eclipse.emf.query.statements.WHERE;
 
 import br.pucrio.inf.les.genarch.models.configuration.ConfigurationAspect;
 import br.pucrio.inf.les.genarch.models.configuration.ConfigurationClass;
@@ -12,12 +20,12 @@ import br.pucrio.inf.les.genarch.models.configuration.ConfigurationFile;
 import br.pucrio.inf.les.genarch.models.configuration.ConfigurationFolder;
 import br.pucrio.inf.les.genarch.models.configuration.ConfigurationFragment;
 import br.pucrio.inf.les.genarch.models.configuration.ConfigurationFragmentContainer;
+import br.pucrio.inf.les.genarch.models.configuration.ConfigurationPackage;
 import br.pucrio.inf.les.genarch.models.configuration.ConfigurationResourcesContainer;
 import br.pucrio.inf.les.genarch.models.configuration.ConfigurationTemplate;
 import br.pucrio.inf.les.genarch.models.configuration.DSM;
 import br.pucrio.inf.les.genarch.models.configuration.DSMElement;
 import br.pucrio.inf.les.genarch.models.configuration.MappingEntity;
-import br.pucrio.inf.les.genarch.models.configuration.MappingRelationships;
 
 public class ConfigurationModelGetElement {
 
@@ -28,35 +36,35 @@ public class ConfigurationModelGetElement {
 	}
 	
 	public MappingEntity mappingEntity(String path) {
-		return getElement(path);
+		return element(path);
 	}
 
 	public ConfigurationComponent component(String path) {
-		return (ConfigurationComponent)getElement(path);
+		return (ConfigurationComponent)element(path);
 	}
 
 	public ConfigurationFolder folder(String path) {
-		return (ConfigurationFolder)getElement(path);
+		return (ConfigurationFolder)element(path);
 	}
 
 	public ConfigurationClass clazz(String path) {
-		return (ConfigurationClass)getElement(path);
+		return (ConfigurationClass)element(path);
 	}
 
 	public ConfigurationAspect aspect(String path) {
-		return (ConfigurationAspect)getElement(path);
+		return (ConfigurationAspect)element(path);
 	}
 
 	public ConfigurationFile file(String path) {
-		return (ConfigurationFile)getElement(path);
+		return (ConfigurationFile)element(path);
 	}
 
 	public ConfigurationTemplate template(String path) {
-		return (ConfigurationTemplate)getElement(path);
+		return (ConfigurationTemplate)element(path);
 	}
 
 	public ConfigurationFragment fragment(String path) {
-		return (ConfigurationFragment)getElement(path);
+		return (ConfigurationFragment)element(path);
 	}
 
 	public DSMElement domainModelElement(String name,String domainModelName) {
@@ -64,63 +72,46 @@ public class ConfigurationModelGetElement {
 	}
 
 	public ConfigurationContainer sourceContainer(String name) {
-		return (ConfigurationContainer)getContainer(name);
+		return (ConfigurationContainer)getContainer(name,ConfigurationPackage.eINSTANCE.getConfigurationContainer_Name());
 	}
 
 	public ConfigurationResourcesContainer resourceContainer(String name) {
-		return (ConfigurationResourcesContainer)getContainer(name);
+		return (ConfigurationResourcesContainer)getContainer(name,ConfigurationPackage.eINSTANCE.getConfigurationResourcesContainer_Name());
 	}
 
 	public ConfigurationFragmentContainer fragmentContainer(String name) {
-		return (ConfigurationFragmentContainer)getContainer(name);
+		return (ConfigurationFragmentContainer)getContainer(name,ConfigurationPackage.eINSTANCE.getConfigurationFragmentContainer_Name());
 	}
 
 	public DSM domainModel(String name) {
 		return getDSM(name);
 	}
 
-	private MappingEntity getElement(String path) {
-		MappingRelationships m = this.configurationModelHandle.getMappingRelationships();
-		TreeIterator iterator = m.eAllContents();
-
-		while ( iterator.hasNext() ) {
-			EObject o = (EObject)iterator.next();
-
-			if ( o instanceof MappingEntity ) {
-				MappingEntity c = (MappingEntity)o;
-				if ( c.getPath().equals(path) ) {
-					return c;
-				}
-			}	   
+	public MappingEntity element(String path) {
+		IQueryResult result = new SELECT(
+				new FROM(this.configurationModelHandle.getMappingRelationships()),
+				new WHERE(new EObjectAttributeValueCondition(ConfigurationPackage.eINSTANCE.getMappingEntity_Path(),new StringValue(path)))).execute();
+		
+		Iterator<EObject> i = result.getEObjects().iterator();
+		
+		if ( !result.isEmpty() ) {
+			return (MappingEntity)i.next();
 		}
-
-		return null;
+		
+		return null;				
 	}
 
-	private EObject getContainer(String name) {
-		TreeIterator iterator = this.configurationModelHandle.getMappingRelationships().eAllContents();
-
-		while ( iterator.hasNext() ) {
-			EObject o = (EObject)iterator.next();
-
-			if ( o instanceof ConfigurationContainer ) {
-				ConfigurationContainer c = (ConfigurationContainer)o;
-				if ( c.getName().equals(name) ) {
-					return c;
-				}
-			} else if ( o instanceof ConfigurationResourcesContainer ) {
-				ConfigurationResourcesContainer c = (ConfigurationResourcesContainer)o;
-				if ( c.getName().equals(name) ) {
-					return c;
-				}
-			} else if ( o instanceof ConfigurationFragmentContainer ) {
-				ConfigurationFragmentContainer c = (ConfigurationFragmentContainer)o;
-				if ( c.getName().equals(name) ) {
-					return c;
-				}
-			}
+	private EObject getContainer(String name,EAttribute attribute) {	
+		IQueryResult result = new SELECT(
+				new FROM(this.configurationModelHandle.getMappingRelationships()),
+				new WHERE(new EObjectAttributeValueCondition(attribute, new StringValue(name)))).execute();
+		
+		Iterator<EObject> i = result.getEObjects().iterator();
+		
+		if ( !result.isEmpty() ) {
+			return i.next();
 		}
-
+		
 		return null;
 	}
 

@@ -146,7 +146,7 @@ public class ConfigurationFragmentContainerItemProvider
 		String label = ((ConfigurationFragmentContainer)object).getName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_ConfigurationFragmentContainer_type") :
-			getString("_UI_ConfigurationFragmentContainer_type") + " " + label;
+			getString("_UI_ConfigurationFragmentContainer_type") + " :: " + label;
 	}
 
 	/**

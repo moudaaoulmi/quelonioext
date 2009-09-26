@@ -5,7 +5,7 @@ import org.eclipse.core.runtime.Path;
 
 public class PathProcessor {
 	
-	public static String extractComponentParentPath(String elementPath) {
+	public static String extractParentPath(String elementPath) {
 		IPath pathAux = new Path(elementPath);
 		return pathAux.removeLastSegments(1).toString();
 	}
@@ -21,7 +21,7 @@ public class PathProcessor {
 	}
 	
 	public static String extractFeatureParentPath(String featurePath) {
-		return extractComponentParentPath(featurePath);
+		return extractParentPath(featurePath);
 	}
 	
 	public static String extractFeatuerParentName(String featurePath) {
@@ -36,7 +36,7 @@ public class PathProcessor {
 	
 	public static String extractFragmentContainerName(String fragmentPath) {
 		IPath pathAux = new Path(fragmentPath);
-		return pathAux.lastSegment();
+		return pathAux.segment(0).toString();
 	}
 
 }

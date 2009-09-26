@@ -197,19 +197,20 @@ public class Logic {
 
 	
 	
-	public static boolean eval(String expression,ProductFeaturesConfiguration productFeaturesConfiguration) {
+	public static boolean eval(String expression,ProductFeaturesConfiguration productFeaturesConfiguration) {		
 		try {
 			IExpression pExp = parseExpression(expression);
 
 			final GenArchExpressionVisitor visitor = new GenArchExpressionVisitor(productFeaturesConfiguration);
-			pExp.accept(visitor);
-
+			pExp.accept(visitor);			
+			
 			Context ctx = Context.enter();
 			Scriptable scope = ctx.initStandardObjects();
-			boolean value = Boolean.parseBoolean(ctx.toString(ctx.evaluateString(scope,visitor.getExpression(), "<cmd>", 1, null)));
+			System.out.println(visitor.getExpression());
+			boolean value = Boolean.parseBoolean(ctx.toString(ctx.evaluateString(scope,visitor.getExpression(), null, 0, null)));
 			
 			return value;
-		} catch (Exception e) {
+		} catch (Exception e) {			
 			e.printStackTrace();
 		}
 

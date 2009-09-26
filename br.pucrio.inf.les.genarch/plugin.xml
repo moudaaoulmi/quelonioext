@@ -149,6 +149,11 @@
               id="br.pucrio.inf.les.genarch.CreateModelsAction"
               label="&amp;Create Models"
               menubarPath="br.pucrio.inf.les.genarch.menu2/group1"/>
+       <action
+              class="br.pucrio.inf.les.genarch.ui.actions.UpdateModelsAction"
+              id="br.pucrio.inf.les.genarch.UpdateModelsAction"
+              label="&amp;Update Models"
+              menubarPath="br.pucrio.inf.les.genarch.menu2/group1"/>
      </objectContribution>
   </extension>
   <extension
@@ -216,5 +221,20 @@
          </enablement>
       </renameParticipant>
  	</extension>
+ 	 <extension
+        		point="org.eclipse.core.contenttype.contentTypes">
+     <file-association
+           content-type="org.eclipse.emf.compare.ui.contenttype.ModelContentType"
+           file-extensions="implementation"
+           file-names="*"/>
+  	</extension>
+  	<extension
+        		point="org.eclipse.core.contenttype.contentTypes">
+     <file-association
+           content-type="org.eclipse.emf.compare.ui.contenttype.ModelContentType"
+           file-extensions="configuration"
+           file-names="*"/>
+  	</extension>
+ 	
 </plugin>
 

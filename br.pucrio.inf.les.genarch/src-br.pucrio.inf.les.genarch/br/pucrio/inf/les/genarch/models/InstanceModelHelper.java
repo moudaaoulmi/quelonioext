@@ -15,6 +15,7 @@ import br.pucrio.inf.les.genarch.models.product.ProductFeaturesConfiguration;
 import br.pucrio.inf.les.genarch.models.product.ProductFragment;
 import br.pucrio.inf.les.genarch.models.product.ProductFragmentContainer;
 import br.pucrio.inf.les.genarch.models.product.ProductImplementationElements;
+import br.pucrio.inf.les.genarch.models.product.ProductPackage;
 import br.pucrio.inf.les.genarch.models.product.ProductResourcesContainer;
 
 public class InstanceModelHelper {
@@ -74,13 +75,13 @@ public class InstanceModelHelper {
 			if ( o instanceof ProductEntity ) {
 				ProductEntity e = (ProductEntity)o;
 				
-				if ( e.getName().equals(sName) ) {
+				if ( e.getPath().equals(sName) ) {
 					return e;
 				}
 			}
 		}
 		
-		return null;
+		return ProductPackage.eINSTANCE.getProductFactory().createProductEntity();
 	}
 	
 	public static ProductFragment fragment(Object name,Object model) {
@@ -95,13 +96,13 @@ public class InstanceModelHelper {
 			if ( o instanceof ProductFragment ) {
 				ProductFragment e = (ProductFragment)o;
 				
-				if ( e.getName().equals(sName) ) {
+				if ( e.getPath().equals(sName) ) {
 					return e;
 				}
 			}
 		}
 		
-		return null;
+		return ProductPackage.eINSTANCE.getProductFactory().createProductFragment();
 	}
 	
 	public static ProductFragmentContainer fragmentsContainer(Object name,Object model) {

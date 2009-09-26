@@ -146,7 +146,7 @@ public class ConfigurationContainerItemProvider
 		String label = ((ConfigurationContainer)object).getName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_ConfigurationContainer_type") :
-			getString("_UI_ConfigurationContainer_type") + " " + label;
+			getString("_UI_ConfigurationContainer_type") + " :: " + label;
 	}
 
 	/**

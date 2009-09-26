@@ -124,7 +124,6 @@ import org.eclipse.ui.views.properties.PropertySheet;
 import org.eclipse.ui.views.properties.PropertySheetPage;
 
 import br.pucrio.inf.les.genarch.core.models.dsl.ImplementationModelUtil;
-import br.pucrio.inf.les.genarch.core.project.GenarchProjectConfigurationFile;
 import br.pucrio.inf.les.genarch.models.configuration.Configuration;
 import br.pucrio.inf.les.genarch.models.configuration.DSM;
 import br.pucrio.inf.les.genarch.models.configuration.DSMMappings;
@@ -132,10 +131,8 @@ import br.pucrio.inf.les.genarch.models.configuration.provider.ConfigurationAdap
 import br.pucrio.inf.les.genarch.models.configuration.provider.ConfigurationAdapterFactoryLabelProvider;
 import br.pucrio.inf.les.genarch.models.configuration.provider.ConfigurationItemProviderAdapterFactory;
 import br.pucrio.inf.les.genarch.models.configuration.provider.ConfigurationMetaModelEditPlugin;
-import ca.uwaterloo.gp.fmp.Project;
+import br.pucrio.inf.les.genarch.models.core.validation.ConfigurationModelValidator;
 import ca.uwaterloo.gp.fmp.provider.nonmodel.ProxyItemProvider;
-import ca.uwaterloo.gp.fmp.util.FmpExternalLoader;
-import ca.uwaterloo.gp.fmp.util.FmpResourceImpl;
 
 
 /**
@@ -381,7 +378,7 @@ public class ConfigurationEditor
 	
 	private ImplementationModelUtil implementationModelUtil;
 	
-	private Project fmpProject;
+	//private Project fmpProject;
 
 	/**
 	 * Adapter used to update the problem indication when resources are demanded loaded.
@@ -915,6 +912,8 @@ public class ConfigurationEditor
 		viewer.addDragSupport(dndOperations, transfers, new ViewerDragAdapter(viewer));
 		viewer.addDropSupport(dndOperations, transfers, new EditingDomainViewerDropAdapter(editingDomain, viewer));
 	}
+	
+	private ConfigurationModelValidator configurationModelValidator;
 
 	/**
 	 * This is the method called to load a resource into the editing domain's resource set based on the editor's input.
@@ -945,7 +944,9 @@ public class ConfigurationEditor
 		IFileEditorInput modelFile = (IFileEditorInput)getEditorInput();
 		project = modelFile.getFile().getProject();
 		
-		GenarchProjectConfigurationFile genarchProjectConfigurationFile = GenarchProjectConfigurationFile.open(project);
+		this.configurationModelValidator = new ConfigurationModelValidator(project);
+		
+		/*GenarchProjectConfigurationFile genarchProjectConfigurationFile = GenarchProjectConfigurationFile.open(project);
 		this.implementationModelUtil = new ImplementationModelUtil(project);
 
 		FmpExternalLoader externalLoader = new FmpExternalLoader();
@@ -955,7 +956,7 @@ public class ConfigurationEditor
 
 		if ( fmpResource.getAllContents().hasNext() ) {
 			this.fmpProject = (Project)fmpResource.getAllContents().next();	
-		}
+		}*/
 	}
 
 	/**
@@ -1568,6 +1569,8 @@ public class ConfigurationEditor
 		}
 		updateProblemIndication = true;
 		updateProblemIndication();
+		
+		this.configurationModelValidator.validate();
 	}
 
 	/**

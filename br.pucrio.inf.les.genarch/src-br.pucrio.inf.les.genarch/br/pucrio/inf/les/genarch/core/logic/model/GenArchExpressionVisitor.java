@@ -25,7 +25,7 @@ public class GenArchExpressionVisitor extends ExpressionVisitor {
 	public Constraint visitAndExpression(AndExpression andExpression) {
 		expressionBuilder.append("(");
 		andExpression.getLhs().accept(this);
-		expressionBuilder.append(" and ");
+		expressionBuilder.append(" && ");
 		andExpression.getRhs().accept(this);
 		expressionBuilder.append(")");
 		return null;
@@ -50,7 +50,7 @@ public class GenArchExpressionVisitor extends ExpressionVisitor {
 
 	@Override
 	public Constraint visitNotExpression(NotExpression notExpression) {
-		expressionBuilder.append(" not ");
+		expressionBuilder.append("!");
 		expressionBuilder.append("(");
 		notExpression.getExp().accept(this);		
 		expressionBuilder.append(")");
@@ -61,7 +61,7 @@ public class GenArchExpressionVisitor extends ExpressionVisitor {
 	public Constraint visitOrExpression(OrExpression orExpression) {
 		expressionBuilder.append("(");
 		orExpression.getLhs().accept(this);
-		expressionBuilder.append(" or ");
+		expressionBuilder.append(" || ");
 		orExpression.getRhs().accept(this);
 		expressionBuilder.append(")");		
 		return null;

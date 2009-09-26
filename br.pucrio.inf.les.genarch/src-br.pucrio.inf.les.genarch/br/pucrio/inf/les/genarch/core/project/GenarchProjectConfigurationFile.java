@@ -1,7 +1,6 @@
 package br.pucrio.inf.les.genarch.core.project;
 
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PipedInputStream;
 import java.io.PipedOutputStream;
@@ -252,9 +251,9 @@ public class GenarchProjectConfigurationFile {
 		monitor.worked(1);
 	}
 
-	private String implementationModelPath;
-	private String configurationModelPath;
-	private String featureModelPath;
+	private String implementationModelPath = "";
+	private String configurationModelPath = "";
+	private String featureModelPath = "";
 	private String classExtension = "java";
 	private String interfaceExtension = "java";
 	private String aspectExtension = "aj";
