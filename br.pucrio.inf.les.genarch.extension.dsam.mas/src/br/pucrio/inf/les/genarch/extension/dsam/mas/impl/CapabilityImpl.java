@@ -8,6 +8,7 @@ package br.pucrio.inf.les.genarch.extension.dsam.mas.impl;
 
 import br.pucrio.inf.les.genarch.extension.dsam.mas.Belief;
 import br.pucrio.inf.les.genarch.extension.dsam.mas.Capability;
+import br.pucrio.inf.les.genarch.extension.dsam.mas.CapabilityReference;
 import br.pucrio.inf.les.genarch.extension.dsam.mas.Event;
 import br.pucrio.inf.les.genarch.extension.dsam.mas.Expression;
 import br.pucrio.inf.les.genarch.extension.dsam.mas.Goal;
@@ -15,11 +16,15 @@ import br.pucrio.inf.les.genarch.extension.dsam.mas.MasPackage;
 import br.pucrio.inf.les.genarch.extension.dsam.mas.Plan;
 
 import br.pucrio.inf.les.genarch.models.dsamtypes.DsamtypesPackage;
+import br.pucrio.inf.les.genarch.models.dsamtypes.GroupComponents;
+import br.pucrio.inf.les.genarch.models.dsamtypes.GroupFiles;
 import br.pucrio.inf.les.genarch.models.dsamtypes.GroupRelationship;
 import br.pucrio.inf.les.genarch.models.dsamtypes.GroupTemplates;
 
 import br.pucrio.inf.les.genarch.models.dsamtypes.impl.VariableElementImpl;
 
+import br.pucrio.inf.les.genarch.models.implementation.ImplementationComponent;
+import br.pucrio.inf.les.genarch.models.implementation.ImplementationFile;
 import br.pucrio.inf.les.genarch.models.implementation.ImplementationTemplate;
 
 import java.util.Collection;
@@ -42,6 +47,8 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * <ul>
  *   <li>{@link br.pucrio.inf.les.genarch.extension.dsam.mas.impl.CapabilityImpl#getTemplates <em>Templates</em>}</li>
+ *   <li>{@link br.pucrio.inf.les.genarch.extension.dsam.mas.impl.CapabilityImpl#getComponents <em>Components</em>}</li>
+ *   <li>{@link br.pucrio.inf.les.genarch.extension.dsam.mas.impl.CapabilityImpl#getFiles <em>Files</em>}</li>
  *   <li>{@link br.pucrio.inf.les.genarch.extension.dsam.mas.impl.CapabilityImpl#getGoals <em>Goals</em>}</li>
  *   <li>{@link br.pucrio.inf.les.genarch.extension.dsam.mas.impl.CapabilityImpl#getBelieves <em>Believes</em>}</li>
  *   <li>{@link br.pucrio.inf.les.genarch.extension.dsam.mas.impl.CapabilityImpl#getPlans <em>Plans</em>}</li>
@@ -63,6 +70,26 @@ public class CapabilityImpl extends VariableElementImpl implements Capability {
 	 * @ordered
 	 */
 	protected EList<ImplementationTemplate> templates;
+
+	/**
+	 * The cached value of the '{@link #getComponents() <em>Components</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getComponents()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ImplementationComponent> components;
+
+	/**
+	 * The cached value of the '{@link #getFiles() <em>Files</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getFiles()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ImplementationFile> files;
 
 	/**
 	 * The cached value of the '{@link #getGoals() <em>Goals</em>}' containment reference list.
@@ -122,7 +149,7 @@ public class CapabilityImpl extends VariableElementImpl implements Capability {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Capability> capabilities;
+	protected EList<CapabilityReference> capabilities;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -153,6 +180,30 @@ public class CapabilityImpl extends VariableElementImpl implements Capability {
 			templates = new EObjectContainmentEList<ImplementationTemplate>(ImplementationTemplate.class, this, MasPackage.CAPABILITY__TEMPLATES);
 		}
 		return templates;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<ImplementationComponent> getComponents() {
+		if (components == null) {
+			components = new EObjectContainmentEList<ImplementationComponent>(ImplementationComponent.class, this, MasPackage.CAPABILITY__COMPONENTS);
+		}
+		return components;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<ImplementationFile> getFiles() {
+		if (files == null) {
+			files = new EObjectContainmentEList<ImplementationFile>(ImplementationFile.class, this, MasPackage.CAPABILITY__FILES);
+		}
+		return files;
 	}
 
 	/**
@@ -220,9 +271,9 @@ public class CapabilityImpl extends VariableElementImpl implements Capability {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Capability> getCapabilities() {
+	public EList<CapabilityReference> getCapabilities() {
 		if (capabilities == null) {
-			capabilities = new EObjectContainmentEList<Capability>(Capability.class, this, MasPackage.CAPABILITY__CAPABILITIES);
+			capabilities = new EObjectContainmentEList<CapabilityReference>(CapabilityReference.class, this, MasPackage.CAPABILITY__CAPABILITIES);
 		}
 		return capabilities;
 	}
@@ -237,6 +288,10 @@ public class CapabilityImpl extends VariableElementImpl implements Capability {
 		switch (featureID) {
 			case MasPackage.CAPABILITY__TEMPLATES:
 				return ((InternalEList<?>)getTemplates()).basicRemove(otherEnd, msgs);
+			case MasPackage.CAPABILITY__COMPONENTS:
+				return ((InternalEList<?>)getComponents()).basicRemove(otherEnd, msgs);
+			case MasPackage.CAPABILITY__FILES:
+				return ((InternalEList<?>)getFiles()).basicRemove(otherEnd, msgs);
 			case MasPackage.CAPABILITY__GOALS:
 				return ((InternalEList<?>)getGoals()).basicRemove(otherEnd, msgs);
 			case MasPackage.CAPABILITY__BELIEVES:
@@ -263,6 +318,10 @@ public class CapabilityImpl extends VariableElementImpl implements Capability {
 		switch (featureID) {
 			case MasPackage.CAPABILITY__TEMPLATES:
 				return getTemplates();
+			case MasPackage.CAPABILITY__COMPONENTS:
+				return getComponents();
+			case MasPackage.CAPABILITY__FILES:
+				return getFiles();
 			case MasPackage.CAPABILITY__GOALS:
 				return getGoals();
 			case MasPackage.CAPABILITY__BELIEVES:
@@ -292,6 +351,14 @@ public class CapabilityImpl extends VariableElementImpl implements Capability {
 				getTemplates().clear();
 				getTemplates().addAll((Collection<? extends ImplementationTemplate>)newValue);
 				return;
+			case MasPackage.CAPABILITY__COMPONENTS:
+				getComponents().clear();
+				getComponents().addAll((Collection<? extends ImplementationComponent>)newValue);
+				return;
+			case MasPackage.CAPABILITY__FILES:
+				getFiles().clear();
+				getFiles().addAll((Collection<? extends ImplementationFile>)newValue);
+				return;
 			case MasPackage.CAPABILITY__GOALS:
 				getGoals().clear();
 				getGoals().addAll((Collection<? extends Goal>)newValue);
@@ -314,7 +381,7 @@ public class CapabilityImpl extends VariableElementImpl implements Capability {
 				return;
 			case MasPackage.CAPABILITY__CAPABILITIES:
 				getCapabilities().clear();
-				getCapabilities().addAll((Collection<? extends Capability>)newValue);
+				getCapabilities().addAll((Collection<? extends CapabilityReference>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -330,6 +397,12 @@ public class CapabilityImpl extends VariableElementImpl implements Capability {
 		switch (featureID) {
 			case MasPackage.CAPABILITY__TEMPLATES:
 				getTemplates().clear();
+				return;
+			case MasPackage.CAPABILITY__COMPONENTS:
+				getComponents().clear();
+				return;
+			case MasPackage.CAPABILITY__FILES:
+				getFiles().clear();
 				return;
 			case MasPackage.CAPABILITY__GOALS:
 				getGoals().clear();
@@ -363,6 +436,10 @@ public class CapabilityImpl extends VariableElementImpl implements Capability {
 		switch (featureID) {
 			case MasPackage.CAPABILITY__TEMPLATES:
 				return templates != null && !templates.isEmpty();
+			case MasPackage.CAPABILITY__COMPONENTS:
+				return components != null && !components.isEmpty();
+			case MasPackage.CAPABILITY__FILES:
+				return files != null && !files.isEmpty();
 			case MasPackage.CAPABILITY__GOALS:
 				return goals != null && !goals.isEmpty();
 			case MasPackage.CAPABILITY__BELIEVES:
@@ -397,6 +474,18 @@ public class CapabilityImpl extends VariableElementImpl implements Capability {
 				default: return -1;
 			}
 		}
+		if (baseClass == GroupComponents.class) {
+			switch (derivedFeatureID) {
+				case MasPackage.CAPABILITY__COMPONENTS: return DsamtypesPackage.GROUP_COMPONENTS__COMPONENTS;
+				default: return -1;
+			}
+		}
+		if (baseClass == GroupFiles.class) {
+			switch (derivedFeatureID) {
+				case MasPackage.CAPABILITY__FILES: return DsamtypesPackage.GROUP_FILES__FILES;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -415,6 +504,18 @@ public class CapabilityImpl extends VariableElementImpl implements Capability {
 		if (baseClass == GroupTemplates.class) {
 			switch (baseFeatureID) {
 				case DsamtypesPackage.GROUP_TEMPLATES__TEMPLATES: return MasPackage.CAPABILITY__TEMPLATES;
+				default: return -1;
+			}
+		}
+		if (baseClass == GroupComponents.class) {
+			switch (baseFeatureID) {
+				case DsamtypesPackage.GROUP_COMPONENTS__COMPONENTS: return MasPackage.CAPABILITY__COMPONENTS;
+				default: return -1;
+			}
+		}
+		if (baseClass == GroupFiles.class) {
+			switch (baseFeatureID) {
+				case DsamtypesPackage.GROUP_FILES__FILES: return MasPackage.CAPABILITY__FILES;
 				default: return -1;
 			}
 		}

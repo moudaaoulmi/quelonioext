@@ -16,7 +16,7 @@ import br.pucrio.inf.les.genarch.models.dsamtypes.IntraDependence;
  *
  *
  * @see br.pucrio.inf.les.genarch.extension.dsam.mas.MasPackage#getCapabilityReference()
- * @model
+ * @model annotation="XML prop='capability' attr='name'"
  * @generated
  */
 public interface CapabilityReference extends GroupFragments, IntraDependence {

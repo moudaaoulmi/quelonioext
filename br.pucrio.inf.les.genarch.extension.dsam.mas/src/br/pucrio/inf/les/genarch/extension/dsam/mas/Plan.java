@@ -17,7 +17,7 @@ import br.pucrio.inf.les.genarch.models.dsamtypes.VariableElement;
  *
  *
  * @see br.pucrio.inf.les.genarch.extension.dsam.mas.MasPackage#getPlan()
- * @model
+ * @model annotation="XML prop='plan' attr='name'"
  * @generated
  */
 public interface Plan extends VariableElement, GroupFragments, GroupClass {

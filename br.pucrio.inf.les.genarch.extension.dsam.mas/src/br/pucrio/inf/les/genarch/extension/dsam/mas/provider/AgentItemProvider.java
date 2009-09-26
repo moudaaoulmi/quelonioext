@@ -87,6 +87,8 @@ public class AgentItemProvider
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(DsamtypesPackage.Literals.GROUP_TEMPLATES__TEMPLATES);
+			childrenFeatures.add(DsamtypesPackage.Literals.GROUP_COMPONENTS__COMPONENTS);
+			childrenFeatures.add(DsamtypesPackage.Literals.GROUP_FILES__FILES);
 			childrenFeatures.add(MasPackage.Literals.AGENT__CAPABILITIES);
 			childrenFeatures.add(MasPackage.Literals.AGENT__GOALS);
 			childrenFeatures.add(MasPackage.Literals.AGENT__BELIEVES);
@@ -148,6 +150,8 @@ public class AgentItemProvider
 
 		switch (notification.getFeatureID(Agent.class)) {
 			case MasPackage.AGENT__TEMPLATES:
+			case MasPackage.AGENT__COMPONENTS:
+			case MasPackage.AGENT__FILES:
 			case MasPackage.AGENT__CAPABILITIES:
 			case MasPackage.AGENT__GOALS:
 			case MasPackage.AGENT__BELIEVES:
@@ -175,6 +179,16 @@ public class AgentItemProvider
 			(createChildParameter
 				(DsamtypesPackage.Literals.GROUP_TEMPLATES__TEMPLATES,
 				 ImplementationFactory.eINSTANCE.createImplementationTemplate()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(DsamtypesPackage.Literals.GROUP_COMPONENTS__COMPONENTS,
+				 ImplementationFactory.eINSTANCE.createImplementationComponent()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(DsamtypesPackage.Literals.GROUP_FILES__FILES,
+				 ImplementationFactory.eINSTANCE.createImplementationFile()));
 
 		newChildDescriptors.add
 			(createChildParameter

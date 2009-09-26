@@ -478,8 +478,12 @@ public class MasPackageImpl extends EPackageImpl implements MasPackage {
 		// Add supertypes to classes
 		agentEClass.getESuperTypes().add(theDsamtypesPackage.getVariableElement());
 		agentEClass.getESuperTypes().add(theDsamtypesPackage.getGroupTemplates());
+		agentEClass.getESuperTypes().add(theDsamtypesPackage.getGroupComponents());
+		agentEClass.getESuperTypes().add(theDsamtypesPackage.getGroupFiles());
 		capabilityEClass.getESuperTypes().add(theDsamtypesPackage.getVariableElement());
 		capabilityEClass.getESuperTypes().add(theDsamtypesPackage.getGroupTemplates());
+		capabilityEClass.getESuperTypes().add(theDsamtypesPackage.getGroupComponents());
+		capabilityEClass.getESuperTypes().add(theDsamtypesPackage.getGroupFiles());
 		planEClass.getESuperTypes().add(theDsamtypesPackage.getVariableElement());
 		planEClass.getESuperTypes().add(theDsamtypesPackage.getGroupFragments());
 		planEClass.getESuperTypes().add(theDsamtypesPackage.getGroupClass());
@@ -513,7 +517,7 @@ public class MasPackageImpl extends EPackageImpl implements MasPackage {
 		initEReference(getCapability_Plans(), this.getPlan(), null, "plans", null, 0, -1, Capability.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCapability_Events(), this.getEvent(), null, "events", null, 0, -1, Capability.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCapability_Expressions(), this.getExpression(), null, "expressions", null, 0, -1, Capability.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getCapability_Capabilities(), this.getCapability(), null, "capabilities", null, 0, -1, Capability.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCapability_Capabilities(), this.getCapabilityReference(), null, "capabilities", null, 0, -1, Capability.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(planEClass, Plan.class, "Plan", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -529,6 +533,62 @@ public class MasPackageImpl extends EPackageImpl implements MasPackage {
 
 		// Create resource
 		createResource(eNS_URI);
+
+		// Create annotations
+		// XML
+		createXMLAnnotations();
+	}
+
+	/**
+	 * Initializes the annotations for <b>XML</b>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void createXMLAnnotations() {
+		String source = "XML";		
+		addAnnotation
+		  (planEClass, 
+		   source, 
+		   new String[] {
+			 "prop", "plan",
+			 "attr", "name"
+		   });		
+		addAnnotation
+		  (goalEClass, 
+		   source, 
+		   new String[] {
+			 "prop", "goal",
+			 "attr", "name"
+		   });		
+		addAnnotation
+		  (eventEClass, 
+		   source, 
+		   new String[] {
+			 "prop", "event",
+			 "attr", "name"
+		   });		
+		addAnnotation
+		  (beliefEClass, 
+		   source, 
+		   new String[] {
+			 "prop", "beliefref",
+			 "attr", "name"
+		   });		
+		addAnnotation
+		  (expressionEClass, 
+		   source, 
+		   new String[] {
+			 "prop", "expression",
+			 "attr", "name"
+		   });		
+		addAnnotation
+		  (capabilityReferenceEClass, 
+		   source, 
+		   new String[] {
+			 "prop", "capability",
+			 "attr", "name"
+		   });
 	}
 
 } //MasPackageImpl

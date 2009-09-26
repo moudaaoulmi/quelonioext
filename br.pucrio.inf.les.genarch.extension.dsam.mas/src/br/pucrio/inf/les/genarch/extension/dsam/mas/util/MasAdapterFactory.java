@@ -11,6 +11,8 @@ import br.pucrio.inf.les.genarch.extension.dsam.mas.*;
 import br.pucrio.inf.les.genarch.models.dsamtypes.DependenceRelationship;
 import br.pucrio.inf.les.genarch.models.dsamtypes.DomainElement;
 import br.pucrio.inf.les.genarch.models.dsamtypes.GroupClass;
+import br.pucrio.inf.les.genarch.models.dsamtypes.GroupComponents;
+import br.pucrio.inf.les.genarch.models.dsamtypes.GroupFiles;
 import br.pucrio.inf.les.genarch.models.dsamtypes.GroupFragments;
 import br.pucrio.inf.les.genarch.models.dsamtypes.GroupRelationship;
 import br.pucrio.inf.les.genarch.models.dsamtypes.GroupTemplates;
@@ -131,6 +133,14 @@ public class MasAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseGroupTemplates(GroupTemplates object) {
 				return createGroupTemplatesAdapter();
+			}
+			@Override
+			public Adapter caseGroupComponents(GroupComponents object) {
+				return createGroupComponentsAdapter();
+			}
+			@Override
+			public Adapter caseGroupFiles(GroupFiles object) {
+				return createGroupFilesAdapter();
 			}
 			@Override
 			public Adapter caseGroupFragments(GroupFragments object) {
@@ -347,6 +357,34 @@ public class MasAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createGroupTemplatesAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link br.pucrio.inf.les.genarch.models.dsamtypes.GroupComponents <em>Group Components</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see br.pucrio.inf.les.genarch.models.dsamtypes.GroupComponents
+	 * @generated
+	 */
+	public Adapter createGroupComponentsAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link br.pucrio.inf.les.genarch.models.dsamtypes.GroupFiles <em>Group Files</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see br.pucrio.inf.les.genarch.models.dsamtypes.GroupFiles
+	 * @generated
+	 */
+	public Adapter createGroupFilesAdapter() {
 		return null;
 	}
 

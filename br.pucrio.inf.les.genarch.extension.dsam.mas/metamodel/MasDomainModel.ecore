@@ -9,7 +9,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="capabilities" upperBound="-1"
         eType="#//Capability" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Agent" eSuperTypes="DSAMElementTypes.ecore#//VariableElement DSAMElementTypes.ecore#//GroupTemplates">
+  <eClassifiers xsi:type="ecore:EClass" name="Agent" eSuperTypes="DSAMElementTypes.ecore#//VariableElement DSAMElementTypes.ecore#//GroupTemplates DSAMElementTypes.ecore#//GroupComponents DSAMElementTypes.ecore#//GroupFiles">
     <eStructuralFeatures xsi:type="ecore:EReference" name="capabilities" upperBound="-1"
         eType="#//CapabilityReference" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="goals" upperBound="-1"
@@ -23,7 +23,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="expressions" upperBound="-1"
         eType="#//Expression" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Capability" eSuperTypes="DSAMElementTypes.ecore#//VariableElement DSAMElementTypes.ecore#//GroupTemplates">
+  <eClassifiers xsi:type="ecore:EClass" name="Capability" eSuperTypes="DSAMElementTypes.ecore#//VariableElement DSAMElementTypes.ecore#//GroupTemplates DSAMElementTypes.ecore#//GroupComponents DSAMElementTypes.ecore#//GroupFiles">
     <eStructuralFeatures xsi:type="ecore:EReference" name="goals" upperBound="-1"
         eType="#//Goal" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="believes" upperBound="-1"

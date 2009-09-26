@@ -6,6 +6,8 @@
  */
 package br.pucrio.inf.les.genarch.extension.dsam.mas;
 
+import br.pucrio.inf.les.genarch.models.dsamtypes.GroupComponents;
+import br.pucrio.inf.les.genarch.models.dsamtypes.GroupFiles;
 import br.pucrio.inf.les.genarch.models.dsamtypes.GroupTemplates;
 import br.pucrio.inf.les.genarch.models.dsamtypes.VariableElement;
 
@@ -32,7 +34,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface Capability extends VariableElement, GroupTemplates {
+public interface Capability extends VariableElement, GroupTemplates, GroupComponents, GroupFiles {
 	/**
 	 * Returns the value of the '<em><b>Goals</b></em>' containment reference list.
 	 * The list contents are of type {@link br.pucrio.inf.les.genarch.extension.dsam.mas.Goal}.
@@ -115,7 +117,7 @@ public interface Capability extends VariableElement, GroupTemplates {
 
 	/**
 	 * Returns the value of the '<em><b>Capabilities</b></em>' containment reference list.
-	 * The list contents are of type {@link br.pucrio.inf.les.genarch.extension.dsam.mas.Capability}.
+	 * The list contents are of type {@link br.pucrio.inf.les.genarch.extension.dsam.mas.CapabilityReference}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Capabilities</em>' containment reference list isn't clear,
@@ -127,6 +129,6 @@ public interface Capability extends VariableElement, GroupTemplates {
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<Capability> getCapabilities();
+	EList<CapabilityReference> getCapabilities();
 
 } // Capability
