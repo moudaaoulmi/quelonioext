@@ -44,7 +44,7 @@ public class ExtractToFragmentWizard extends Wizard implements INewWizard {
 		String fragmentName = this.extractToFragmentWizardPage.getFragmentName();
 		String fragmentContainerName = this.extractToFragmentWizardPage.getFragmentContainerName();
 
-		fragmentContainerName = fragmentContainerName.substring("Fragment Container".length()+1,fragmentContainerName.length());
+		fragmentContainerName = fragmentContainerName.substring("Fragment Container".length()+4,fragmentContainerName.length());
 
 		ImplementationModelHandle implementationModelHandle = ImplementationModelHandle.implementationModel(this.project);
 		ImplementationFragmentContainer fragmentContainer = implementationModelHandle.get().fragmentContainer(fragmentContainerName);
@@ -67,8 +67,10 @@ public class ExtractToFragmentWizard extends Wizard implements INewWizard {
 			String first = stringContent.substring(0,selecion.getOffset());
 			String last = stringContent.substring(selecion.getOffset() + selecion.getLength(),stringContent.length());
 			String comment = "«REM»Code extracted to '" + implementationFragment.getPath() + "' frament«ENDREM»";
+			String letCode = "«LET fragment(\"" + implementationFragment.getPath() + "\",architecture) AS e»«e.content»«ENDLET»";
+			String content = comment + "\n" + letCode;
 						
-			ByteArrayInputStream newInputStream = new ByteArrayInputStream((first + comment + last).getBytes());
+			ByteArrayInputStream newInputStream = new ByteArrayInputStream((first + content + last).getBytes());
 
 			try {
 				if ( file.exists() ) {
