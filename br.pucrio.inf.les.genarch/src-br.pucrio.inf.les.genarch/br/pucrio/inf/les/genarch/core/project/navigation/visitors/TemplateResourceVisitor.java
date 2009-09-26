@@ -45,8 +45,10 @@ public class TemplateResourceVisitor implements ResourceClient {
 	}
 
 	public void visit(IResource resource) {		
-		if ( resource.getType() == IResource.FILE ) {  		
-			if ( resource.getFileExtension().equals("java") ) {	
+		if ( resource.getType() == IResource.FILE ) {
+			if ( resource.getFileExtension() == null ) {
+				System.out.println(resource.getFullPath());
+			} else if ( resource.getFileExtension().equals("java") ) {	
 				VariabilityItem variabilityItem = JavaAnnotationUtil.variabilityAnnotation((IFile)resource);
 				if ( variabilityItem != null ) {
 					variabilityItem.setItemDescription(makeClassVariabilityItemDescription(resource));

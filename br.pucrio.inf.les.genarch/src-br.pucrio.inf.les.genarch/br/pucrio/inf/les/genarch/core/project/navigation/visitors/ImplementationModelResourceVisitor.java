@@ -52,9 +52,16 @@ public class ImplementationModelResourceVisitor implements ResourceClient {
 			IFile file = (IFile)resource;
 			String componentParentPath = NavigationUtil.getParentByPath(file.getProjectRelativePath().toString());
 			EObject parent = architectureContent.getElementByPath(componentParentPath);
-
-			if ( file.getFileExtension().equals("java") ) {
-				System.out.println(resourceName);
+			
+			if ( file.getFileExtension() == null ) {
+				if ( parent instanceof ImplementationResourcesContainer ) {
+					this.architectureContent.addFile(resourceName,resourcePhysicalPath,(ImplementationResourcesContainer)parent);
+				} else if ( parent instanceof ImplementationComponent ) {
+					this.architectureContent.addFile(resourceName,resourcePhysicalPath,(ImplementationComponent)parent);
+				} else if ( parent instanceof ImplementationFolder ) {
+					this.architectureContent.addFile(resourceName,resourcePhysicalPath,(ImplementationFolder)parent);
+				}
+			} else if ( file.getFileExtension().equals("java") ) {
 				this.architectureContent.addClass(resourceName,resourcePhysicalPath,(ImplementationComponent)parent);
 			} else if ( file.getFileExtension().equals("aj") ) {
 				this.architectureContent.addAspect(resourceName,resourcePhysicalPath,(ImplementationComponent)parent);
@@ -76,7 +83,6 @@ public class ImplementationModelResourceVisitor implements ResourceClient {
 				} else if ( parent instanceof ImplementationFolder ) {
 					this.architectureContent.addFile(resourceName,resourcePhysicalPath,(ImplementationFolder)parent);
 				}
-
 			}
 		}
 	}

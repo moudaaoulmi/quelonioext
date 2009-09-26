@@ -43,8 +43,10 @@ public class ConfigurationModelResourceVisitor implements ResourceClient {
 				this.configurationContent.addResourcesContainer(resource.getName());
 			}
 		} else if ( resource.getType() == IResource.FILE ) {
-
-			if ( resource.getFileExtension().equals("java") ) {		
+			
+			if ( resource.getFileExtension() == null ) {
+				
+			} else if ( resource.getFileExtension().equals("java") ) {		
 				featuresItem = JavaAnnotationUtil.featureAnnotations((IFile)resource);		
 
 				for ( FeatureItem featureItem: featuresItem ) {					

@@ -85,7 +85,7 @@ public class ConfigurationFragmentItemProvider
 		String label = ((ConfigurationFragment)object).getName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_ConfigurationFragment_type") :
-			getString("_UI_ConfigurationFragment_type") + " " + label;
+			getString("_UI_ConfigurationFragment_type") + " :: " + label;
 	}
 
 	/**

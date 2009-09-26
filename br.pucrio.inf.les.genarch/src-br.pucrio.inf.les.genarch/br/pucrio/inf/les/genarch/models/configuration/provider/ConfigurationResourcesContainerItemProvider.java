@@ -148,7 +148,7 @@ public class ConfigurationResourcesContainerItemProvider
 		String label = ((ConfigurationResourcesContainer)object).getName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_ConfigurationResourcesContainer_type") :
-			getString("_UI_ConfigurationResourcesContainer_type") + " " + label;
+			getString("_UI_ConfigurationResourcesContainer_type") + " :: " + label;
 	}
 
 	/**

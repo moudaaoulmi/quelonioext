@@ -85,7 +85,7 @@ public class ConfigurationClassItemProvider
 		String label = ((ConfigurationClass)object).getName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_ConfigurationClass_type") :
-			getString("_UI_ConfigurationClass_type") + " " + label;
+			getString("_UI_ConfigurationClass_type") + " :: " + label;
 	}
 
 	/**

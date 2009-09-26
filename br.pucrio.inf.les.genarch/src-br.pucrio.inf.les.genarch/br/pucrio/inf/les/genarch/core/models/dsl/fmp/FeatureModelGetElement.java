@@ -13,9 +13,9 @@ public class FeatureModelGetElement {
 		this.featureModelHandle = featureModelHandle;
 	}
 	
-	public Feature feature(String path) {
+	public Feature feature(String id) {
 		Node model = featureModelHandle.getFmpProject().getModel();
-		ca.uwaterloo.gp.fmp.Feature featureNode = (ca.uwaterloo.gp.fmp.Feature)ModelNavigation.INSTANCE.findNodeWithName(model,extractFeatureNameFromPath(path));
+		ca.uwaterloo.gp.fmp.Feature featureNode = (ca.uwaterloo.gp.fmp.Feature)ModelNavigation.INSTANCE.findNodeWithName(model,extractFeatureNameFromPath(id));
 		
 		if ( featureNode != null ) {
 			String attribute = null;
@@ -29,7 +29,7 @@ public class FeatureModelGetElement {
 											.max(featureNode.getMax())
 											.min(featureNode.getMin())
 											.attribute(attribute)
-											.path(path).build();		
+											.path(id).build();		
 		}
 		
 		return null;

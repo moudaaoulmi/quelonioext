@@ -71,7 +71,13 @@ Require-Bundle: ca.uwaterloo.gp.fmp,
  org.antlr.runtime,
  org.eclipse.ltk.core.refactoring,
  org.eclipse.emf.query,
- org.eclipse.ui.editors
+ org.eclipse.ui.editors,
+ org.eclipse.compare,
+ org.eclipse.emf.compare,
+ org.eclipse.emf.compare.match,
+ org.eclipse.emf.compare.diff,
+ org.eclipse.emf.compare.diff.edit,
+ org.eclipse.emf.compare.ui
 Eclipse-LazyStart: true
 Bundle-Activator: br.pucrio.inf.les.genarch.GenArchPlugin
 Export-Package: br.pucrio.inf.les.genarch,

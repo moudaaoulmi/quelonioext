@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 
 import br.pucrio.inf.les.genarch.core.models.dsl.implementation.ImplementationModelHandle;
+import br.pucrio.inf.les.genarch.core.models.dsl.implementation.ImplementationTemplateBuilder;
 import br.pucrio.inf.les.genarch.core.plugin.GenArchEMFPlugin;
 import br.pucrio.inf.les.genarch.models.implementation.ImplementationPackage;
 import br.pucrio.inf.les.genarch.models.implementation.ImplementationTemplate;
@@ -63,18 +64,29 @@ public class ConvertFileToTemplate implements IRunnableWithProgress {
 			newInputStream.close();
 			inputStream.close();
 			
-			file.delete(false,progressMonitor);
+			String oldFileName = file.getName();
+			String oldFileExtension = file.getFileExtension();
+			String oldFilePath = file.getProjectRelativePath().toString();
 			
-			ImplementationTemplate implementationTemplate = ImplementationPackage.eINSTANCE.getImplementationFactory().createImplementationTemplate();
-			implementationTemplate.setGenerationPath(file.getProjectRelativePath().removeLastSegments(1).toString());
-			implementationTemplate.setName(file.getName() + ".xpt");
-			implementationTemplate.setPath(file.getProjectRelativePath().append(file.getName() + ".xpt").toString());
-			
+			String newFileName = oldFileName + ".xpt";
+			String newFileGenerationPath = file.getProjectRelativePath().removeLastSegments(1).toString();
+			String newFilePath = file.getProjectRelativePath().removeLastSegments(1).append(newFileName).toString();
+									
+			ImplementationTemplate implementationTemplate = ImplementationTemplateBuilder.implementationTemplate().name(newFileName).path(newFilePath).generationPath(newFileGenerationPath).build();
+												
 			ImplementationModelHandle implementationModel = ImplementationModelHandle.implementationModel(file.getProject());
 			implementationModel.add().template(implementationTemplate);
+															
+			if ( "java".equals(oldFileExtension) ) {
+				EcoreUtil.remove(implementationModel.get().clazz(oldFilePath));
+			} else if ( "aj".equals(oldFileExtension) ) {
+				EcoreUtil.remove(implementationModel.get().aspect(oldFilePath));
+			} else {
+				EcoreUtil.remove(implementationModel.get().file(oldFilePath));
+			}
 			
-			EcoreUtil.remove(implementationModel.get().clazz(file.getProjectRelativePath().toString()));
-			
+			file.delete(false,progressMonitor);
+									
 			implementationModel.save();
 		} catch (CoreException e) {
 			GenArchEMFPlugin.INSTANCE.log(e);

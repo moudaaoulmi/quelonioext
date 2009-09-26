@@ -10,30 +10,42 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.EList;
 
-import br.pucrio.inf.les.genarch.core.extension.IPostProcessor;
+import br.pucrio.inf.les.genarch.core.logic.Logic;
+import br.pucrio.inf.les.genarch.core.models.dsl.configuration.ConfigurationModel;
 import br.pucrio.inf.les.genarch.core.resources.dsl.AspectAnnotationUtil;
 import br.pucrio.inf.les.genarch.core.resources.dsl.JavaAnnotationUtil;
+import br.pucrio.inf.les.genarch.models.configuration.ConfigurationAspect;
+import br.pucrio.inf.les.genarch.models.configuration.ConfigurationClass;
+import br.pucrio.inf.les.genarch.models.configuration.ConfigurationComponent;
+import br.pucrio.inf.les.genarch.models.configuration.ConfigurationFile;
+import br.pucrio.inf.les.genarch.models.configuration.ConfigurationFolder;
+import br.pucrio.inf.les.genarch.models.configuration.FeatureExpression;
 import br.pucrio.inf.les.genarch.models.product.Product;
 import br.pucrio.inf.les.genarch.models.product.ProductAspect;
 import br.pucrio.inf.les.genarch.models.product.ProductClass;
 import br.pucrio.inf.les.genarch.models.product.ProductComponent;
 import br.pucrio.inf.les.genarch.models.product.ProductContainer;
 import br.pucrio.inf.les.genarch.models.product.ProductEntity;
+import br.pucrio.inf.les.genarch.models.product.ProductFeaturesConfiguration;
 import br.pucrio.inf.les.genarch.models.product.ProductFile;
 import br.pucrio.inf.les.genarch.models.product.ProductFolder;
 import br.pucrio.inf.les.genarch.models.product.ProductImplementationElements;
 import br.pucrio.inf.les.genarch.models.product.ProductResourcesContainer;
 
-public class DerivateImplementationElements implements IPostProcessor {
+public class DerivateImplementationElements {
 
 	private IProgressMonitor monitor;
 	private IProject project;
 	private IProject derivationProject;
+	private ConfigurationModel configurationModel;
+	private ProductFeaturesConfiguration productFeaturesConfiguration;
 
-	public void process(IProject project, IProject derivationProject,Product productModel, IProgressMonitor monitor) {
+	public void process(IProject project, IProject derivationProject,Product productModel, ProductFeaturesConfiguration productFeatureConfiguration, IProgressMonitor monitor) {
 		this.monitor = monitor;
 		this.project = project;
 		this.derivationProject = derivationProject;
+		this.productFeaturesConfiguration = productFeatureConfiguration;
+		this.configurationModel = configurationModel.open(project);
 
 		ProductImplementationElements implementationElements = productModel.getProductImplementationElements();
 
@@ -45,7 +57,7 @@ public class DerivateImplementationElements implements IPostProcessor {
 
 			for (int x = 0; x < components.size(); x++) {
 				ProductComponent component = (ProductComponent)components.get(x);
-				derivateComponent(component);  
+				derivateComponent(component);				
 			}			
 		}
 
@@ -57,14 +69,16 @@ public class DerivateImplementationElements implements IPostProcessor {
 			EList folders = container.getFolders();
 
 			for (int x = 0; x < folders.size(); x++) {
-				ProductFolder folder = (ProductFolder)folders.get(x);	    
-				derivateFolder(folder);						
+				ProductFolder folder = (ProductFolder)folders.get(x);
+				ConfigurationFolder cFolder = configurationModel.get().folder(folder.getPath());
+				derivateFolder(folder);
 			}
 
 			EList files = container.getFiles();
 
 			for ( int filesCount = 0; filesCount < files.size(); filesCount++ ) {
 				ProductFile file = (ProductFile)files.get(filesCount);
+				ConfigurationFile cFile = configurationModel.get().file(file.getPath());
 				derivateElement(file);
 			}	
 		}	
@@ -72,12 +86,12 @@ public class DerivateImplementationElements implements IPostProcessor {
 
 	private void derivateComponent(ProductComponent component) {
 		buildFolder(component.getPath(), monitor);
-		
+
 		EList classes = component.getClasses();
 
 		for ( int classesCount = 0; classesCount < classes.size(); classesCount++ ) {
 			ProductClass clazz = (ProductClass)classes.get(classesCount);
-			derivateElement(clazz);
+			derivateElement(clazz);			
 		}
 
 		EList aspects = component.getAspects();
@@ -91,7 +105,7 @@ public class DerivateImplementationElements implements IPostProcessor {
 
 		for ( int filesCount = 0; filesCount < files.size(); filesCount++ ) {
 			ProductFile file = (ProductFile)files.get(filesCount);
-			derivateElement(file);
+			derivateElement(file);			
 		}
 
 		EList subComponents = component.getSubComponents();
@@ -104,19 +118,19 @@ public class DerivateImplementationElements implements IPostProcessor {
 
 	private void derivateFolder(ProductFolder folder) {
 		buildFolder(folder.getPath(), monitor);
-		
+
 		EList files = folder.getFiles();
 
 		for ( int filesCount = 0; filesCount < files.size(); filesCount++ ) {
 			ProductFile file = (ProductFile)files.get(filesCount);
-			derivateElement(file);
+			derivateElement(file);		
 		}
 
 		EList subFolders = folder.getSubFolders();
 
 		for ( int subFoldersCount = 0; subFoldersCount < subFolders.size(); subFoldersCount++ ) {
 			ProductFolder subFolder = (ProductFolder)subFolders.get(subFoldersCount);
-			derivateFolder(subFolder);			
+			derivateFolder(subFolder);
 		}
 	}
 
@@ -140,7 +154,6 @@ public class DerivateImplementationElements implements IPostProcessor {
 			IFile newEntityFile = this.derivationProject.getFile(element.getPath());
 
 			if ( "java".equals(newEntityFile.getFileExtension()) ) {
-				System.out.println(newEntityFile.getFullPath().toString());
 				JavaAnnotationUtil.removeFeatureAnnotations(newEntityFile);
 				JavaAnnotationUtil.removeVariabilityAnnotation(newEntityFile);				
 			} else if ( "aj".equals(newEntityFile.getFileExtension())) {

@@ -1,6 +1,5 @@
 package br.pucrio.inf.les.genarch.core.operations;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,6 +21,7 @@ import br.pucrio.inf.les.genarch.core.derivation.TransformArchModels;
 import br.pucrio.inf.les.genarch.core.derivation.TransformFeatureModelConfiguration;
 import br.pucrio.inf.les.genarch.core.derivation.csp.CSPBuilder;
 import br.pucrio.inf.les.genarch.core.extension.IPostProcessor;
+import br.pucrio.inf.les.genarch.core.models.dsl.configuration.ConfigurationModel;
 import br.pucrio.inf.les.genarch.core.plugin.DomainModelDescription;
 import br.pucrio.inf.les.genarch.core.plugin.GenArchPluginFacade;
 import br.pucrio.inf.les.genarch.core.project.GenarchProjectConfigurationFile;
@@ -78,7 +78,7 @@ public class DerivateAsNewProjectOperation {
 
 		Configuration configuration = (Configuration)configurationResource.getContents().get(0);
 		MappingRelationships configurationModel = configuration.getMappingRelationships();
-		
+
 		//Feature Model
 		IFile fmpModelFile = project.getFile(featureModelFileName);
 		FmpExternalLoader externalLoader = new FmpExternalLoader();
@@ -86,11 +86,11 @@ public class DerivateAsNewProjectOperation {
 		EList resourceList = externalLoader.getResources();					
 		FmpResourceImpl fmpResource = (FmpResourceImpl)resourceList.get(0);
 		Project fmpProject = (Project)fmpResource.getAllContents().next();
-		
+
 		//TSAM
 		Map<String,EObject> domainModels = new HashMap<String, EObject>();
 		Map<String,String> domainModelsFiles = genarchProjectConfigurationFile.getDomainModelsFiles();
-				
+
 		for ( String key : domainModelsFiles.keySet() ) {
 			String domainModelFilePath = domainModelsFiles.get(key);
 
@@ -101,32 +101,34 @@ public class DerivateAsNewProjectOperation {
 			Resource domainModelResource = domainModelResourceSet.getResource(domainModelFileURI,true);
 
 			EObject domainModelRoot = (EObject)domainModelResource.getContents().get(0);
-			
+
 			domainModels.put(key,domainModelRoot);
 		}
-		
+
 		Product productModel = ProductPackage.eINSTANCE.getProductFactory().createProduct();
-							
+
 		//Create Product Feature Model Configuration
 		ProductFeaturesConfiguration productFeaturesConfiguration = TransformFeatureModelConfiguration.transform(fmpProject,configurationIndex);
 		productModel.setProductFeatures(productFeaturesConfiguration);
-				
-		//Transform Feature Model on a CSP
-		CSPBuilder.csp().buildFeatureModelCSP(productFeaturesConfiguration);
 		
+		CSPBuilder csp = CSPBuilder.csp();
+
+		//Transform Feature Model on a CSP
+		csp.buildFeatureModelCSP(productFeaturesConfiguration);
+
 		//Create Product Implementation Model
 		TransformArchModels transformArchModels = new TransformArchModels(project);
 		ProductImplementationElements productImplementationElements = transformArchModels.transform(architectureModel,configurationModel,productFeaturesConfiguration);
 		productModel.setProductImplementationElements(productImplementationElements);
-		
+
 		//Transform Architecture on a CSP
-		CSPBuilder.csp().buildArchitectureModelCSP(productImplementationElements,configurationModel);
-		
+		csp.buildArchitectureModelCSP(productImplementationElements,configurationModel);
+
 		//Transform TSAM
 		List<DomainModelDescription> domainModelDescriptions = GenArchPluginFacade.Instance().getDomainModelDescriptions();
-		
+
 		ProductDomainModels proDomainModels = ProductPackage.eINSTANCE.getProductFactory().createProductDomainModels();		
-		
+
 		for ( DomainModelDescription domainModelDescription : domainModelDescriptions ) {
 			List models = configuration.getDsmMappings().getModels();
 			for ( int x = 0; x < models.size(); x++ ) {
@@ -135,31 +137,32 @@ public class DerivateAsNewProjectOperation {
 					String domainName = domainModelDescription.getName();					
 					if ( domainModels.containsKey(domainName) ) {
 						EObject domainModel = domainModels.get(domainName);
-						
+
 						//Create Products Domain Models
 						ProductDomainModel productDomainModel = ProcessDomainModel.process(domainModelDescription,domainModel,dsm,productFeaturesConfiguration);
 						proDomainModels.getDomainModel().add(productDomainModel);
-						
-						CSPBuilder.csp().bulidDomainModelCSP(productDomainModel,domainModel,dsm);
+
+						csp.bulidDomainModelCSP(productDomainModel,domainModel,dsm);
 					}																			
 				}
 			}						
 		}
-		
+
 		productModel.setDomainModels(proDomainModels);
-			
-		CSPBuilder.csp().solve(productImplementationElements,proDomainModels.getDomainModel());
-	
-		DerivateImplementationElements derivateImplementationElements = new DerivateImplementationElements();
-		derivateImplementationElements.process(project, newProject, productModel, monitor);
 
-		DerivateTemplates derivateTemplates = new DerivateTemplates();
-		derivateTemplates.process(project, newProject, productModel, monitor);
+		if ( csp.solve(productImplementationElements,proDomainModels.getDomainModel(),ConfigurationModel.open(project),productFeaturesConfiguration) ) {
 
-		List<IPostProcessor> postProcessors = GenArchPluginFacade.Instance().getPostProcessors();
+			DerivateImplementationElements derivateImplementationElements = new DerivateImplementationElements();
+			derivateImplementationElements.process(project, newProject, productModel, productFeaturesConfiguration, monitor);
 
-		for ( IPostProcessor postProcessor : postProcessors ) {
-			postProcessor.process(project, newProject, productModel, monitor);
+			DerivateTemplates derivateTemplates = new DerivateTemplates();
+			derivateTemplates.process(project, newProject, productModel, monitor);
+
+			List<IPostProcessor> postProcessors = GenArchPluginFacade.Instance().getPostProcessors();
+
+			for ( IPostProcessor postProcessor : postProcessors ) {
+				postProcessor.process(project, newProject, productModel, monitor);
+			}
 		}
 	}
 

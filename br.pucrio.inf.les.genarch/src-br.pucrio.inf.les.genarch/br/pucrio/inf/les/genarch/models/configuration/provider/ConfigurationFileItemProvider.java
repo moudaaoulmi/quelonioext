@@ -85,7 +85,7 @@ public class ConfigurationFileItemProvider
 		String label = ((ConfigurationFile)object).getName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_ConfigurationFile_type") :
-			getString("_UI_ConfigurationFile_type") + " " + label;
+			getString("_UI_ConfigurationFile_type") + " :: " + label;
 	}
 
 	/**

@@ -124,7 +124,7 @@ public class ConfigurationComponentItemProvider
 		String label = ((ConfigurationComponent)object).getName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_ConfigurationComponent_type") :
-			getString("_UI_ConfigurationComponent_type") + " " + label;
+			getString("_UI_ConfigurationComponent_type") + " :: " + label;
 	}
 
 	/**

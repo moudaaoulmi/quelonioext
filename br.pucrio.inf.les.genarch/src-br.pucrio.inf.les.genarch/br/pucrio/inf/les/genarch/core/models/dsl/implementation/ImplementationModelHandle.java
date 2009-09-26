@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -18,40 +19,52 @@ import br.pucrio.inf.les.genarch.models.implementation.ImplementationResourcesCo
 
 public class ImplementationModelHandle {
 
-	private Implementation amplementation;
-	private Resource amplementationResource;
+	private Implementation implementation;
+	private Resource implementationResource;
+	private IResource resource;
 
-	private ImplementationModelAddElement amplementationModelAddElement;
-	private ImplementationModelGetElement amplementationModelGetElement;
+	private ImplementationModelAddElement implementationModelAddElement;
+	private ImplementationModelGetElement implementationModelGetElement;
+	private ImplementationModelIterator implementationModelIterator;
 
-	private ImplementationModelHandle(URI amplementationFileURI) {
-		ResourceSet amplementationResourceSet = new ResourceSetImpl();
-		this.amplementationResource = amplementationResourceSet.getResource(amplementationFileURI, true);
-		this.amplementation = (Implementation)amplementationResource.getContents().get(0);
+	private ImplementationModelHandle(IResource resource,URI implementationFileURI) {
+		ResourceSet implementationResourceSet = new ResourceSetImpl();
+		this.implementationResource = implementationResourceSet.getResource(implementationFileURI, true);
+		this.implementation = (Implementation)implementationResource.getContents().get(0);
+		this.resource = resource;
 
-		this.amplementationModelAddElement = new ImplementationModelAddElement(this);
-		this.amplementationModelGetElement = new ImplementationModelGetElement(this);
+		this.implementationModelAddElement = new ImplementationModelAddElement(this);
+		this.implementationModelGetElement = new ImplementationModelGetElement(this);
+		this.implementationModelIterator = new ImplementationModelIterator(this);
 	}
 
 	public static ImplementationModelHandle implementationModel(IProject project) {
 		GenarchProjectConfigurationFile configurationFile = GenarchProjectConfigurationFile.open(project);
 
-		IFile amplementationModelFile = project.getFile(configurationFile.getImplementationModelPath());
-		URI amplementationFileURI = URI.createPlatformResourceURI(amplementationModelFile.getFullPath().toString(),false);
+		IFile implementationModelFile = project.getFile(configurationFile.getImplementationModelPath());
+		URI implementationFileURI = URI.createPlatformResourceURI(implementationModelFile.getFullPath().toString(),false);
 
-		return new ImplementationModelHandle(amplementationFileURI);
+		return new ImplementationModelHandle(implementationModelFile,implementationFileURI);
 	}
 
 	public ImplementationContainerGetter<ImplementationResourcesContainer> resourceContainer() {
-		return new ImplementationContainerGetter<ImplementationResourcesContainer>(this.amplementation);
+		return new ImplementationContainerGetter<ImplementationResourcesContainer>(this.implementation);
 	}
 
 	public ImplementationModelGetElement get() {
-		return this.amplementationModelGetElement;
+		return this.implementationModelGetElement;
 	}
 
 	public ImplementationModelAddElement add() {
-		return this.amplementationModelAddElement;
+		return this.implementationModelAddElement;
+	}
+	
+	public ImplementationModelIterator iterator() {
+		return this.implementationModelIterator;
+	}
+	
+	public IResource getResource() {
+		return this.resource;
 	}
 
 	public void save() {
@@ -59,13 +72,13 @@ public class ImplementationModelHandle {
 		options.put(XMLResource.OPTION_ENCODING, "UTF-8");
 
 		try {
-			amplementationResource.save(options);
+			this.implementationResource.save(options);
 		} catch (  IOException e) {
 			e.printStackTrace();
 		}
 	}
 
-	protected Implementation getImplementation() {
-		return this.amplementation;
+	public Implementation getImplementation() {
+		return this.implementation;
 	}
 }

@@ -1,7 +1,15 @@
 package br.pucrio.inf.les.genarch.core.models.dsl.implementation;
 
-import org.eclipse.emf.common.util.TreeIterator;
+import java.util.Iterator;
+
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.query.conditions.eobjects.structuralfeatures.EObjectAttributeValueCondition;
+import org.eclipse.emf.query.conditions.strings.StringValue;
+import org.eclipse.emf.query.statements.FROM;
+import org.eclipse.emf.query.statements.IQueryResult;
+import org.eclipse.emf.query.statements.SELECT;
+import org.eclipse.emf.query.statements.WHERE;
 
 import br.pucrio.inf.les.genarch.models.implementation.ImplementationAspect;
 import br.pucrio.inf.les.genarch.models.implementation.ImplementationClass;
@@ -12,98 +20,83 @@ import br.pucrio.inf.les.genarch.models.implementation.ImplementationFile;
 import br.pucrio.inf.les.genarch.models.implementation.ImplementationFolder;
 import br.pucrio.inf.les.genarch.models.implementation.ImplementationFragment;
 import br.pucrio.inf.les.genarch.models.implementation.ImplementationFragmentContainer;
+import br.pucrio.inf.les.genarch.models.implementation.ImplementationPackage;
 import br.pucrio.inf.les.genarch.models.implementation.ImplementationResourcesContainer;
 import br.pucrio.inf.les.genarch.models.implementation.ImplementationTemplate;
 
 public class ImplementationModelGetElement {
 
-	private ImplementationModelHandle architectureModelHandle;
+	private ImplementationModelHandle implementationModelHandle;
 
 	public ImplementationModelGetElement(ImplementationModelHandle architectureModelHandle) {
-		this.architectureModelHandle = architectureModelHandle;
+		this.implementationModelHandle = architectureModelHandle;
 	}
 	
 	public ImplementationComponent component(String path) {
-		return (ImplementationComponent)getElement(path);
+		return (ImplementationComponent)element(path);
 	}
 	
 	public ImplementationFolder folder(String path) {
-		return (ImplementationFolder)getElement(path);
+		return (ImplementationFolder)element(path);
 	}
 	
 	public ImplementationClass clazz(String path) {
-		return (ImplementationClass)getElement(path);
+		return (ImplementationClass)element(path);
 	}
 	
 	public ImplementationAspect aspect(String path) {
-		return (ImplementationAspect)getElement(path);
+		return (ImplementationAspect)element(path);
 	}
 	
 	public ImplementationFile file(String path) {
-		return (ImplementationFile)getElement(path);
+		return (ImplementationFile)element(path);
 	}
 	
 	public ImplementationTemplate template(String path) {
-		return (ImplementationTemplate)getElement(path);
+		return (ImplementationTemplate)element(path);
 	}
 	
 	public ImplementationFragment fragment(String path) {
-		return (ImplementationFragment)getElement(path);
+		return (ImplementationFragment)element(path);
 	}
 	
 	public ImplementationContainer sourceContainer(String name) {
-		return (ImplementationContainer)getContainer(name);
+		return (ImplementationContainer)container(name,ImplementationPackage.eINSTANCE.getImplementationContainer_Name());
 	}
 			
 	public ImplementationResourcesContainer resourceContainer(String name) {
-		return (ImplementationResourcesContainer)getContainer(name);
+		return (ImplementationResourcesContainer)container(name,ImplementationPackage.eINSTANCE.getImplementationResourcesContainer_Name());
 	}
 	
 	public ImplementationFragmentContainer fragmentContainer(String name) {
-		return (ImplementationFragmentContainer)getContainer(name);
+		return (ImplementationFragmentContainer)container(name,ImplementationPackage.eINSTANCE.getImplementationFragmentContainer_Name());
 	}
 
-	private ImplementationEntity getElement(String path) {
-		TreeIterator iterator = this.architectureModelHandle.getImplementation().eAllContents();
-
-		while ( iterator.hasNext() ) {
-			EObject o = (EObject)iterator.next();
-
-			if ( o instanceof ImplementationEntity ) {
-				ImplementationEntity c = (ImplementationEntity)o;
-				if ( c.getPath().equals(path) ) {
-					return c;
-				}
-			}	   
+	public ImplementationEntity element(String path) {
+		IQueryResult result = new SELECT(
+				new FROM(this.implementationModelHandle.getImplementation()),
+				new WHERE(new EObjectAttributeValueCondition(ImplementationPackage.eINSTANCE.getImplementationEntity_Path(),new StringValue(path)))).execute();
+		
+		Iterator<EObject> i = result.getEObjects().iterator();
+		
+		if ( !result.isEmpty() ) {
+			return (ImplementationEntity)i.next();
 		}
-
+		
 		return null;
 	}
 	
-	private EObject getContainer(String name) {
-		TreeIterator iterator = this.architectureModelHandle.getImplementation().eAllContents();
-
-		while ( iterator.hasNext() ) {
-			EObject o = (EObject)iterator.next();
-
-			if ( o instanceof ImplementationContainer ) {
-				ImplementationContainer c = (ImplementationContainer)o;
-				if ( c.getName().equals(name) ) {
-					return c;
-				}
-			} else if ( o instanceof ImplementationResourcesContainer ) {
-				ImplementationResourcesContainer c = (ImplementationResourcesContainer)o;
-				if ( c.getName().equals(name) ) {
-					return c;
-				}
-			} else if ( o instanceof ImplementationFragmentContainer ) {
-				ImplementationFragmentContainer c = (ImplementationFragmentContainer)o;
-				if ( c.getName().equals(name) ) {
-					return c;
-				}
-			}
+	private EObject container(String name,EAttribute attribute) {
+		IQueryResult result = new SELECT(
+				new FROM(this.implementationModelHandle.getImplementation()),
+				new WHERE(new EObjectAttributeValueCondition(attribute, new StringValue(name)))).execute();
+		
+		Iterator<EObject> i = result.getEObjects().iterator();
+		
+		if ( !result.isEmpty() ) {
+			return i.next();
 		}
-
+		
 		return null;
 	}
 }

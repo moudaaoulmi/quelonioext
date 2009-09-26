@@ -85,7 +85,7 @@ public class ConfigurationAspectItemProvider
 		String label = ((ConfigurationAspect)object).getName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_ConfigurationAspect_type") :
-			getString("_UI_ConfigurationAspect_type") + " " + label;
+			getString("_UI_ConfigurationAspect_type") + " :: " + label;
 	}
 
 	/**

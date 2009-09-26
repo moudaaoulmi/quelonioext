@@ -85,7 +85,7 @@ public class ConfigurationTemplateItemProvider
 		String label = ((ConfigurationTemplate)object).getName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_ConfigurationTemplate_type") :
-			getString("_UI_ConfigurationTemplate_type") + " " + label;
+			getString("_UI_ConfigurationTemplate_type") + " :: " + label;
 	}
 
 	/**

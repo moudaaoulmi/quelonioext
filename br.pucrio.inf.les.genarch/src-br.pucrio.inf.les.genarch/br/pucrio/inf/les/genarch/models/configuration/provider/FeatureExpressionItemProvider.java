@@ -113,7 +113,7 @@ public class FeatureExpressionItemProvider
 		String label = ((FeatureExpression)object).getExpression();
 		return label == null || label.length() == 0 ?
 			getString("_UI_FeatureExpression_type") :
-			getString("_UI_FeatureExpression_type") + " " + label;
+			getString("_UI_FeatureExpression_type") + " :: " + label;
 	}
 
 	/**

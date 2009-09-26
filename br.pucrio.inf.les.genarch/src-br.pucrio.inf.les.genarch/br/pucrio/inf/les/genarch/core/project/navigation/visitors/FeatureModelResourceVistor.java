@@ -43,8 +43,10 @@ public class FeatureModelResourceVistor implements ResourceClient {
 
 	public void visit(IResource resource) {
 
-		if ( resource.getType() == IResource.FILE ) {  		
-			if ( resource.getFileExtension().equals("java") ) {		
+		if ( resource.getType() == IResource.FILE ) {
+			if ( resource.getFileExtension() == null ) {
+				
+			} else if ( resource.getFileExtension().equals("java") ) {
 				this.proccessClassAnnotations(resource);				
 			} else if ( resource.getFileExtension().equals("aj") ) {
 				this.proccessAspectAnnotations(resource);
