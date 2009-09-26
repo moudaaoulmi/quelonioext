@@ -101,6 +101,7 @@ import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IEditorSite;
+import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.IPartListener;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.PartInitException;
@@ -116,6 +117,7 @@ import org.eclipse.ui.views.properties.IPropertySheetPage;
 import org.eclipse.ui.views.properties.PropertySheet;
 import org.eclipse.ui.views.properties.PropertySheetPage;
 
+import br.pucrio.inf.les.genarch.models.core.validation.ImplementationModelValidator;
 import br.pucrio.inf.les.genarch.models.implementation.provider.ImplementationItemProviderAdapterFactory;
 import br.pucrio.inf.les.genarch.models.implementation.provider.ImplementationMetaModelEditPlugin;
 
@@ -890,6 +892,8 @@ public class ImplementationEditor
 		viewer.addDropSupport(dndOperations, transfers, new EditingDomainViewerDropAdapter(editingDomain, viewer));*/
 	}
 
+	private ImplementationModelValidator implementationModelValidator;
+	
 	/**
 	 * This is the method called to load a resource into the editing domain's resource set based on the editor's input.
 	 * <!-- begin-user-doc -->
@@ -915,6 +919,9 @@ public class ImplementationEditor
 			resourceToDiagnosticMap.put(resource,  analyzeResourceProblems(resource, exception));
 		}
 		editingDomain.getResourceSet().eAdapters().add(problemIndicationAdapter);
+		
+		IFileEditorInput modelFile = (IFileEditorInput)getEditorInput();		
+		this.implementationModelValidator = new ImplementationModelValidator(modelFile.getFile().getProject());
 	}
 
 	/**
@@ -1472,6 +1479,8 @@ public class ImplementationEditor
 		}
 		updateProblemIndication = true;
 		updateProblemIndication();
+		
+		this.implementationModelValidator.validate();
 	}
 
 	/**
@@ -1539,7 +1548,7 @@ public class ImplementationEditor
 			getActionBars().getStatusLineManager() != null ?
 				getActionBars().getStatusLineManager().getProgressMonitor() :
 				new NullProgressMonitor();
-		doSave(progressMonitor);
+		doSave(progressMonitor);		
 	}
 
 	/**
