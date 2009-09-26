@@ -112,7 +112,7 @@ public class ImplementationTemplateItemProvider
 		String label = ((ImplementationTemplate)object).getName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_ImplementationTemplate_type") :
-			getString("_UI_ImplementationTemplate_type") + " " + label;
+			getString("_UI_ImplementationTemplate_type") + " :: " + label;
 	}
 
 	/**

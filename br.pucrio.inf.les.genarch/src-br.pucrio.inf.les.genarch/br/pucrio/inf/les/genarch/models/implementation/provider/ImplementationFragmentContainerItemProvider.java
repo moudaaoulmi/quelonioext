@@ -146,7 +146,7 @@ public class ImplementationFragmentContainerItemProvider
 		String label = ((ImplementationFragmentContainer)object).getName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_ImplementationFragmentContainer_type") :
-			getString("_UI_ImplementationFragmentContainer_type") + " " + label;
+			getString("_UI_ImplementationFragmentContainer_type") + " :: " + label;
 	}
 
 	/**

@@ -85,7 +85,7 @@ public class ImplementationFileItemProvider
 		String label = ((ImplementationFile)object).getName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_ImplementationFile_type") :
-			getString("_UI_ImplementationFile_type") + " " + label;
+			getString("_UI_ImplementationFile_type") + " :: " + label;
 	}
 
 	/**

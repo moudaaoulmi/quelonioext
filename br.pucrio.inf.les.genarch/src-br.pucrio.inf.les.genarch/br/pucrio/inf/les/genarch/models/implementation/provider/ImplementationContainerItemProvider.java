@@ -146,7 +146,7 @@ public class ImplementationContainerItemProvider
 		String label = ((ImplementationContainer)object).getName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_ImplementationContainer_type") :
-			getString("_UI_ImplementationContainer_type") + " " + label;
+			getString("_UI_ImplementationContainer_type") + " :: " + label;
 	}
 
 	/**
