@@ -85,7 +85,7 @@ public class ImplementationAspectItemProvider
 		String label = ((ImplementationAspect)object).getName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_ImplementationAspect_type") :
-			getString("_UI_ImplementationAspect_type") + " " + label;
+			getString("_UI_ImplementationAspect_type") + " :: " + label;
 	}
 
 	/**

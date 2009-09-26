@@ -85,7 +85,7 @@ public class ImplementationClassItemProvider
 		String label = ((ImplementationClass)object).getName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_ImplementationClass_type") :
-			getString("_UI_ImplementationClass_type") + " " + label;
+			getString("_UI_ImplementationClass_type") + " :: " + label;
 	}
 
 	/**

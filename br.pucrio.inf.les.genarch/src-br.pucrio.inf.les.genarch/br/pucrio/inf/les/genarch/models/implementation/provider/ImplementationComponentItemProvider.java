@@ -124,7 +124,7 @@ public class ImplementationComponentItemProvider
 		String label = ((ImplementationComponent)object).getName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_ImplementationComponent_type") :
-			getString("_UI_ImplementationComponent_type") + " " + label;
+			getString("_UI_ImplementationComponent_type") + " :: " + label;
 	}
 
 	/**

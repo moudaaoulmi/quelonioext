@@ -122,7 +122,7 @@ public class ImplementationFolderItemProvider
 		String label = ((ImplementationFolder)object).getName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_ImplementationFolder_type") :
-			getString("_UI_ImplementationFolder_type") + " " + label;
+			getString("_UI_ImplementationFolder_type") + " :: " + label;
 	}
 
 	/**

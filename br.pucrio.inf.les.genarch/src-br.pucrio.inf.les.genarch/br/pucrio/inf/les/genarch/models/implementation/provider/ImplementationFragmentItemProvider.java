@@ -112,7 +112,7 @@ public class ImplementationFragmentItemProvider
 		String label = ((ImplementationFragment)object).getName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_ImplementationFragment_type") :
-			getString("_UI_ImplementationFragment_type") + " " + label;
+			getString("_UI_ImplementationFragment_type") + " :: " + label;
 	}
 
 	/**
